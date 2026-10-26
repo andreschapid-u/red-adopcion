@@ -24,7 +24,7 @@ GitHub Actions ──► scripts/fetch-data.ts ──► src/data/{site,pets}.js
 ```
 
 - Frescura: cron cada 30 minutos + `workflow_dispatch`.
-- Datos: `apiSitio()` + `apiCatalogo(pagina, 500)` paginado para soportar 1000+ fichas.
+- Datos: `apiHealth()` como smoke test + `apiSitio()` + `apiCatalogo(pagina, 500)` paginado para soportar 1000+ fichas. El build falla si el API no responde o no devuelve fundaciones.
 - Imágenes: resize de `lh3.googleusercontent.com` con `srcset` (400/800/1200) y placeholder local si falta o falla la foto.
 - SEO: rutas reales, canonical, OG/Twitter por mascota, JSON-LD, sitemap e índice alfabético.
 - Compartir: Facebook, WhatsApp, X, Instagram (share nativo o copiar enlace), copiar y Web Share.

@@ -30,6 +30,14 @@ const envelopeSchema = z.object({
   meta: z.record(z.string(), z.unknown()).optional(),
 });
 
+const apiHealthDataSchema = z.object({
+  status: z.literal('ok'),
+  version: z.string(),
+  fundaciones: z.number().int().nonnegative(),
+  mascotas: z.number().int().nonnegative(),
+  generatedAt: z.string(),
+});
+
 const runResponseSchema = z.object({
   response: z.object({ result: z.unknown() }).optional(),
   error: z
@@ -146,6 +154,18 @@ async function runFunction(
     throw new Error(`API ${fn} falló: ${envelope.error?.code ?? 'UNKNOWN'} — ${envelope.error?.message ?? ''}`);
   }
 
+  const warnings = Array.isArray(envelope.meta?.warnings)
+    ? envelope.meta.warnings.filter((warning): warning is string => typeof warning === 'string')
+    : [];
+  for (const warning of warnings) {
+    log(`Aviso de ${fn}: ${warning}`);
+  }
+
+  const skipped = envelope.meta?.skipped;
+  if (typeof skipped === 'number' && skipped > 0) {
+    log(`Aviso de ${fn}: ${skipped} fila(s) omitidas por datos inválidos.`);
+  }
+
   return envelope.data;
 }
 
@@ -209,9 +229,21 @@ async function main(): Promise<void> {
   log('Solicitando access token…');
   const token = await getAccessToken();
 
+  const health = await withRetry('apiHealth', async () =>
+    apiHealthDataSchema.parse(await runFunction(token, deploymentId, 'apiHealth', [])),
+  );
+  log(
+    `API v${health.version} en línea: ${health.fundaciones} fundaciones, ` +
+      `${health.mascotas} fila(s) de mascotas.`,
+  );
+
   const sitioData = await withRetry('apiSitio', async () =>
     apiSitioDataSchema.parse(await runFunction(token, deploymentId, 'apiSitio', [])),
   );
+
+  if (sitioData.fundaciones.length === 0) {
+    throw new Error('El API no devolvió fundaciones. Revisa Config_Fundaciones antes de publicar.');
+  }
 
   const fundacionIds = new Set(sitioData.fundaciones.map((fundacion) => fundacion.id));
 
