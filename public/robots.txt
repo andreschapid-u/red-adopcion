@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+
+Disallow: /red-adopcion/404.html
+
+Sitemap: https://andreschapid-u.github.io/red-adopcion/sitemap-index.xml

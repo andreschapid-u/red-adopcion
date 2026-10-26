@@ -1,0 +1,479 @@
+---
+import Base from '../layouts/Base.astro';
+import PetCard from '../components/PetCard.astro';
+import { fundaciones, pets, site } from '../lib/data';
+import { imageSources } from '../lib/images';
+import { absUrl, asset, withBase } from '../lib/urls';
+import {
+  availablePets,
+  formatNumber,
+  jsonLd,
+  metaDescription,
+  petSummary,
+  sortPets,
+  truncate,
+} from '../lib/utils';
+
+const PER_PAGE = 24;
+const disponibles = sortPets(availablePets(pets));
+const inicial = disponibles.slice(0, PER_PAGE);
+
+const indice = pets.map((pet) => {
+  const imagen = imageSources(pet.fotos.principal);
+  return {
+    i: pet.id,
+    n: pet.nombre,
+    e: pet.especie,
+    s: pet.estado,
+    f: pet.fundacionId,
+    fn: pet.fundacionNombre,
+    ed: pet.edad,
+    q: truncate(petSummary(pet), 150),
+    p: asset(imagen.src),
+    ps: imagen.srcset ?? '',
+  };
+});
+
+const title = 'Mascotas en adopción | Red de Adopción';
+const description = metaDescription(
+  `Explora ${disponibles.length} mascotas en adopción de ${fundaciones.length} fundaciones. Filtra por especie, fundación y estado, y contacta directo por WhatsApp.`,
+);
+
+const structuredData = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: 'Catálogo de mascotas en adopción',
+    url: absUrl('/catalogo/'),
+    description,
+    inLanguage: 'es-CO',
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Inicio', item: absUrl('/') },
+      { '@type': 'ListItem', position: 2, name: 'Catálogo', item: absUrl('/catalogo/') },
+    ],
+  },
+];
+---
+
+<Base title={title} description={description} path="/catalogo/" structuredData={structuredData}>
+  <script is:inline type="application/json" id="pets-index" set:html={jsonLd(indice)} />
+
+  <div id="catalogo" class="scroll-mt-24">
+    <div class="border-b border-slate-200 bg-white">
+      <div class="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
+        <nav aria-label="Ruta de navegación" class="text-sm text-slate-500">
+          <ol class="flex flex-wrap items-center gap-2">
+            <li><a href={withBase('/')} class="hover:text-slate-900">Inicio</a></li>
+            <li aria-hidden="true">/</li>
+            <li aria-current="page" class="font-medium text-slate-700">Catálogo</li>
+          </ol>
+        </nav>
+
+        <div class="mt-4 flex flex-wrap items-end justify-between gap-4">
+          <div>
+            <h1 class="text-3xl font-extrabold sm:text-4xl">Mascotas en adopción</h1>
+            <p class="mt-2 max-w-2xl text-slate-600">
+              {site.general.titulo
+                ? `${site.general.titulo}. `
+                : ''}Filtra por fundación, especie o estado. Cada ficha te lleva directo al WhatsApp de quien la cuida.
+            </p>
+          </div>
+          <p class="rounded-full bg-indigo-50 px-3 py-1 text-sm font-semibold text-indigo-700">
+            {formatNumber(disponibles.length)} disponibles
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+      <form
+        id="filters"
+        class="grid gap-3 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm sm:grid-cols-2 lg:grid-cols-4"
+        novalidate
+      >
+        <label class="block">
+          <span class="mb-1 block text-xs font-semibold uppercase tracking-wide text-slate-500">Fundación</span>
+          <select
+            id="filter-fundacion"
+            class="w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-sm text-slate-800 shadow-sm focus:border-indigo-500"
+          >
+            <option value="">Todas las fundaciones</option>
+            {fundaciones.map((fundacion) => (
+              <option value={fundacion.id}>{fundacion.nombre}</option>
+            ))}
+          </select>
+        </label>
+
+        <label class="block">
+          <span class="mb-1 block text-xs font-semibold uppercase tracking-wide text-slate-500">Especie</span>
+          <select
+            id="filter-especie"
+            class="w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-sm text-slate-800 shadow-sm focus:border-indigo-500"
+          >
+            <option value="">Todas las especies</option>
+            <option value="Perros">Perros</option>
+            <option value="Gatos">Gatos</option>
+            <option value="Otros">Otros</option>
+          </select>
+        </label>
+
+        <label class="block">
+          <span class="mb-1 block text-xs font-semibold uppercase tracking-wide text-slate-500">Estado</span>
+          <select
+            id="filter-estado"
+            class="w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-sm text-slate-800 shadow-sm focus:border-indigo-500"
+          >
+            <option value="">Todos los estados</option>
+            <option value="Disponible en adopción" selected>Disponible en adopción</option>
+            <option value="Adoptado">Adoptado</option>
+            <option value="Fallecido">Fallecido</option>
+          </select>
+        </label>
+
+        <label class="block">
+          <span class="mb-1 block text-xs font-semibold uppercase tracking-wide text-slate-500">Buscar</span>
+          <input
+            id="filter-q"
+            type="search"
+            autocomplete="off"
+            placeholder="Nombre, cualidad o fundación"
+            class="w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-sm text-slate-800 shadow-sm placeholder:text-slate-400 focus:border-indigo-500"
+          />
+        </label>
+
+        <div class="flex flex-wrap items-center justify-between gap-2 border-t border-slate-100 pt-3 sm:col-span-2 lg:col-span-4">
+          <p id="pets-count" aria-live="polite" class="text-sm font-medium text-slate-600">
+            {formatNumber(disponibles.length)} mascotas encontradas
+          </p>
+          <button
+            type="button"
+            id="filter-reset"
+            class="rounded-lg px-3 py-1.5 text-sm font-semibold text-indigo-700 transition hover:bg-indigo-50"
+          >
+            Limpiar filtros
+          </button>
+        </div>
+      </form>
+
+      <noscript>
+        <p class="mt-4 rounded-xl border border-amber-200 bg-amber-50 p-3 text-sm text-amber-800">
+          Los filtros necesitan JavaScript. Puedes navegar todas las fichas desde el
+          <a class="underline" href={withBase('/mascotas/')}>índice alfabético</a>.
+        </p>
+      </noscript>
+
+      <div id="pets-grid" class="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        {inicial.map((pet, index) => (
+          <PetCard pet={pet} priority={index < 4} />
+        ))}
+        {inicial.length === 0 && (
+          <p class="col-span-full rounded-2xl border border-dashed border-slate-300 bg-white p-10 text-center text-slate-500">
+            Todavía no hay mascotas disponibles con estos filtros.
+          </p>
+        )}
+      </div>
+
+      <nav id="pets-pager" class="mt-8 flex flex-wrap items-center justify-center gap-2" aria-label="Paginación"></nav>
+
+      <p class="mt-6 text-center text-sm text-slate-500">
+        ¿Buscas una mascota en particular? Revisa el
+        <a class="font-semibold text-indigo-700 hover:text-indigo-900" href={withBase('/mascotas/')}>
+          índice alfabético de todas las mascotas
+        </a>.
+      </p>
+    </div>
+  </div>
+<script>
+  const BASE = import.meta.env.BASE_URL.replace(/\/+$/, '');
+  const PLACEHOLDER = `${BASE}/images/pet-placeholder.svg`;
+  const PER_PAGE = 24;
+  const DEFAULT_ESTADO = 'Disponible en adopción';
+  const SIZES = '(min-width: 1280px) 25vw, (min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw';
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const dataNode = document.getElementById('pets-index');
+  const grid = document.getElementById('pets-grid');
+  const pager = document.getElementById('pets-pager');
+  const count = document.getElementById('pets-count');
+  const fundSelect = document.getElementById('filter-fundacion') as HTMLSelectElement | null;
+  const especieSelect = document.getElementById('filter-especie') as HTMLSelectElement | null;
+  const estadoSelect = document.getElementById('filter-estado') as HTMLSelectElement | null;
+  const searchInput = document.getElementById('filter-q') as HTMLInputElement | null;
+  const resetButton = document.getElementById('filter-reset');
+
+  type Item = {
+    i: string;
+    n: string;
+    e: string;
+    s: string;
+    f: string;
+    fn: string;
+    ed: string;
+    q: string;
+    p: string;
+    ps: string;
+  };
+
+  type State = {
+    fundacion: string;
+    especie: string;
+    estado: string;
+    q: string;
+    pagina: number;
+  };
+
+  const items: Item[] = dataNode ? (JSON.parse(dataNode.textContent || '[]') as Item[]) : [];
+
+  if (grid && pager && count && fundSelect && especieSelect && estadoSelect && searchInput) {
+    const esc = (value: unknown): string =>
+      String(value ?? '').replace(/[&<>"']/g, (char) => {
+        switch (char) {
+          case '&':
+            return '&amp;';
+          case '<':
+            return '&lt;';
+          case '>':
+            return '&gt;';
+          case '"':
+            return '&quot;';
+          default:
+            return '&#39;';
+        }
+      });
+
+    const norm = (value: string): string =>
+      value
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .toLowerCase();
+
+    const badgeClass = (estado: string): string => {
+      if (estado === 'Disponible en adopción') return 'bg-emerald-50 text-emerald-700 ring-emerald-600/20';
+      if (estado === 'Adoptado') return 'bg-indigo-50 text-indigo-700 ring-indigo-600/20';
+      if (estado === 'Fallecido') return 'bg-slate-100 text-slate-600 ring-slate-500/20';
+      return 'bg-slate-100 text-slate-600 ring-slate-500/20';
+    };
+
+    const cardHtml = (pet: Item, index: number): string => {
+      const srcset = pet.ps ? ` srcset="${esc(pet.ps)}"` : '';
+      const eager = index < 4;
+      return `<article class="group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition hover:-translate-y-0.5 hover:shadow-lg hover:shadow-slate-200/60">
+  <a href="${BASE}/mascota/${encodeURIComponent(pet.i)}/" class="block focus-visible:rounded-2xl">
+    <div class="relative aspect-[4/3] overflow-hidden bg-slate-100">
+      <img src="${esc(pet.p)}"${srcset} sizes="${SIZES}" width="640" height="480" alt="${esc(
+        `${pet.n}, ${pet.e === 'Perros' ? 'perro' : pet.e === 'Gatos' ? 'gato' : 'animal'} — ${pet.s}`,
+      )}" loading="${eager ? 'eager' : 'lazy'}" fetchpriority="${eager ? 'high' : 'auto'}" decoding="async" class="h-full w-full object-cover motion-safe:transition motion-safe:duration-300 motion-safe:group-hover:scale-105" onerror="this.onerror=null;this.removeAttribute('srcset');this.src='${PLACEHOLDER}'" />
+      <span class="absolute left-3 top-3 rounded-full px-2.5 py-1 text-[11px] font-semibold ring-1 ring-inset ${badgeClass(
+        pet.s,
+      )}">${esc(pet.s)}</span>
+    </div>
+    <div class="p-4">
+      <div class="flex items-baseline justify-between gap-2">
+        <h3 class="font-heading text-lg font-bold leading-tight text-slate-900">${esc(pet.n)}</h3>
+        <span class="shrink-0 text-xs font-medium text-slate-500">${esc(pet.ed)}</span>
+      </div>
+      <p class="mt-1 text-sm font-medium text-indigo-700">${esc(pet.fn)}</p>
+      <p class="mt-2 line-clamp-2 min-h-[2.5rem] text-sm leading-5 text-slate-600">${esc(pet.q)}</p>
+      <span class="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-indigo-700">
+        Conocer a ${esc(pet.n)}
+        <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </span>
+    </div>
+  </a>
+</article>`;
+    };
+
+    const readState = (): State => {
+      const params = new URLSearchParams(window.location.search);
+      const rawPage = Number.parseInt(params.get('pagina') || '1', 10);
+      return {
+        fundacion: params.get('fundacion') || '',
+        especie: params.get('especie') || '',
+        estado: params.has('estado') ? params.get('estado') || '' : DEFAULT_ESTADO,
+        q: params.get('q') || '',
+        pagina: Number.isFinite(rawPage) && rawPage > 0 ? rawPage : 1,
+      };
+    };
+
+    let state: State = readState();
+
+    const applyInputs = (): void => {
+      fundSelect.value = state.fundacion;
+      especieSelect.value = state.especie;
+      estadoSelect.value = state.estado;
+      searchInput.value = state.q;
+    };
+
+    const syncUrl = (mode: 'push' | 'replace'): void => {
+      const url = new URL(window.location.href);
+      const set = (key: string, value: string): void => {
+        if (value) url.searchParams.set(key, value);
+        else url.searchParams.delete(key);
+      };
+
+      set('fundacion', state.fundacion);
+      set('especie', state.especie);
+      if (state.estado === DEFAULT_ESTADO) url.searchParams.delete('estado');
+      else url.searchParams.set('estado', state.estado);
+      set('q', state.q);
+      if (state.pagina > 1) url.searchParams.set('pagina', String(state.pagina));
+      else url.searchParams.delete('pagina');
+
+      window.history[mode === 'push' ? 'pushState' : 'replaceState']({}, '', url);
+    };
+
+    const pageNumbers = (current: number, total: number): number[] => {
+      const values = new Set<number>([1, total, current - 1, current, current + 1]);
+      if (current <= 3) [2, 3, 4].forEach((value) => values.add(value));
+      if (current >= total - 2) [total - 1, total - 2, total - 3].forEach((value) => values.add(value));
+      return [...values].filter((value) => value >= 1 && value <= total).sort((a, b) => a - b);
+    };
+
+    const pagerHtml = (current: number, total: number): string => {
+      if (total <= 1) return '';
+
+      const button = (page: number, label: string, disabled = false, ariaLabel = `Página ${page}`): string =>
+        `<button type="button" data-page="${page}" ${disabled ? 'disabled' : ''} class="rounded-lg border px-3 py-2 text-sm font-semibold transition ${
+          disabled
+            ? 'cursor-not-allowed border-slate-200 bg-slate-50 text-slate-300'
+            : page === current
+              ? 'border-indigo-600 bg-indigo-600 text-white'
+              : 'border-slate-200 bg-white text-slate-700 hover:bg-slate-50'
+        }" ${page === current ? 'aria-current="page"' : ''} aria-label="${ariaLabel}">${label}</button>`;
+
+      const numbers = pageNumbers(current, total);
+      let last = 0;
+      let middle = '';
+      for (const page of numbers) {
+        if (last && page - last > 1) {
+          middle += '<span class="px-1 text-slate-400" aria-hidden="true">…</span>';
+        }
+        middle += button(page, String(page));
+        last = page;
+      }
+
+      return `${button(current - 1, 'Anterior', current === 1, 'Página anterior')}${middle}${button(
+        current + 1,
+        'Siguiente',
+        current === total,
+        'Página siguiente',
+      )}<span class="ml-2 w-full text-center text-sm text-slate-500 sm:w-auto">Página ${current} de ${total}</span>`;
+    };
+
+    const matches = (pet: Item): boolean => {
+      if (state.fundacion && pet.f !== state.fundacion) return false;
+      if (state.especie && pet.e !== state.especie) return false;
+      if (state.estado && pet.s !== state.estado) return false;
+      if (state.q) {
+        const needle = norm(state.q);
+        if (!norm(`${pet.n} ${pet.q} ${pet.fn}`).includes(needle)) return false;
+      }
+      return true;
+    };
+
+    const render = (): void => {
+      const filtered = items
+        .filter(matches)
+        .sort(
+          (a, b) =>
+            a.n.localeCompare(b.n, 'es', { sensitivity: 'base', numeric: true }) || a.i.localeCompare(b.i),
+        );
+
+      const totalPages = Math.max(1, Math.ceil(filtered.length / PER_PAGE));
+      if (state.pagina > totalPages) state.pagina = totalPages;
+
+      const from = (state.pagina - 1) * PER_PAGE;
+      const pageItems = filtered.slice(from, from + PER_PAGE);
+
+      if (pageItems.length === 0) {
+        grid.innerHTML = `<div class="col-span-full rounded-2xl border border-dashed border-slate-300 bg-white p-10 text-center">
+          <p class="font-heading text-lg font-bold text-slate-800">No encontramos mascotas con esos filtros</p>
+          <p class="mt-1 text-sm text-slate-500">Prueba con otra especie, otra fundación o limpia la búsqueda.</p>
+          <button type="button" data-clear class="mt-4 rounded-lg bg-indigo-600 px-4 py-2 text-sm font-semibold text-white hover:bg-indigo-700">Limpiar filtros</button>
+        </div>`;
+      } else {
+        grid.innerHTML = pageItems.map((pet, index) => cardHtml(pet, index)).join('');
+      }
+
+      count.textContent = `${filtered.length.toLocaleString('es-CO')} ${
+        filtered.length === 1 ? 'mascota encontrada' : 'mascotas encontradas'
+      }`;
+      pager.innerHTML = pagerHtml(state.pagina, totalPages);
+    };
+
+    const resetFilters = (): void => {
+      state = { fundacion: '', especie: '', estado: DEFAULT_ESTADO, q: '', pagina: 1 };
+      applyInputs();
+      syncUrl('push');
+      render();
+    };
+
+    fundSelect.addEventListener('change', () => {
+      state.fundacion = fundSelect.value;
+      state.pagina = 1;
+      syncUrl('push');
+      render();
+    });
+
+    especieSelect.addEventListener('change', () => {
+      state.especie = especieSelect.value;
+      state.pagina = 1;
+      syncUrl('push');
+      render();
+    });
+
+    estadoSelect.addEventListener('change', () => {
+      state.estado = estadoSelect.value;
+      state.pagina = 1;
+      syncUrl('push');
+      render();
+    });
+
+    let searchTimer: number | undefined;
+    searchInput.addEventListener('input', () => {
+      window.clearTimeout(searchTimer);
+      searchTimer = window.setTimeout(() => {
+        state.q = searchInput.value.trim();
+        state.pagina = 1;
+        syncUrl('replace');
+        render();
+      }, 250);
+    });
+
+    resetButton?.addEventListener('click', resetFilters);
+
+    grid.addEventListener('click', (event) => {
+      const target = event.target as HTMLElement;
+      if (target.closest('[data-clear]')) resetFilters();
+    });
+
+    pager.addEventListener('click', (event) => {
+      const target = (event.target as HTMLElement).closest<HTMLButtonElement>('button[data-page]');
+      if (!target || target.disabled) return;
+      const page = Number(target.dataset.page);
+      if (!Number.isInteger(page) || page < 1) return;
+
+      state.pagina = page;
+      syncUrl('push');
+      render();
+      document.getElementById('catalogo')?.scrollIntoView({
+        behavior: reduceMotion ? 'auto' : 'smooth',
+        block: 'start',
+      });
+    });
+
+    window.addEventListener('popstate', () => {
+      state = readState();
+      applyInputs();
+      render();
+    });
+
+    applyInputs();
+    render();
+  }
+</script>
+</Base>

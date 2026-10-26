@@ -1,0 +1,78 @@
+---
+import type { Fundacion } from '../lib/schema';
+import { imageSources } from '../lib/images';
+import { asset, withBase } from '../lib/urls';
+import { whatsappUrl } from '../lib/utils';
+
+interface Props {
+  fundacion: Fundacion;
+  /** Mascotas disponibles de esta fundación. */
+  count: number;
+}
+
+const { fundacion, count } = Astro.props;
+
+const logo = fundacion.logo ? imageSources(fundacion.logo) : null;
+const initial = fundacion.nombre.trim().charAt(0).toUpperCase();
+const adoptar = whatsappUrl(
+  fundacion.whatsapp,
+  `Hola ${fundacion.nombre}, quiero conocer más sobre una mascota en adopción.`,
+);
+---
+
+<article class="flex h-full flex-col rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+  <div class="flex items-center gap-4">
+    <div class="relative grid h-14 w-14 shrink-0 place-items-center overflow-hidden rounded-xl bg-indigo-50 text-lg font-bold text-indigo-700">
+      <span aria-hidden="true">{initial}</span>
+      {logo && (
+        <img
+          src={asset(logo.src)}
+          srcset={logo.srcset}
+          sizes="56px"
+          width="56"
+          height="56"
+          alt={`Logo de ${fundacion.nombre}`}
+          loading="lazy"
+          decoding="async"
+          class="absolute inset-0 h-full w-full bg-white object-contain p-1"
+          onerror="this.style.display='none'"
+        />
+      )}
+    </div>
+    <div class="min-w-0">
+      <h3 class="font-heading text-base font-bold leading-tight text-slate-900">{fundacion.nombre}</h3>
+      <p class="mt-1 text-sm text-slate-500">
+        {count === 1 ? '1 mascota disponible' : `${count} mascotas disponibles`}
+      </p>
+    </div>
+  </div>
+
+  <div class="mt-5 flex flex-wrap gap-2">
+    <a
+      href={`${withBase('/catalogo/')}?fundacion=${encodeURIComponent(fundacion.id)}`}
+      class="inline-flex items-center gap-1.5 rounded-lg bg-slate-900 px-3 py-2 text-xs font-semibold text-white transition hover:bg-slate-700"
+    >
+      Ver sus mascotas
+    </a>
+    {adoptar && (
+      <a
+        href={adoptar}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-1.5 rounded-lg border border-emerald-200 bg-emerald-50 px-3 py-2 text-xs font-semibold text-emerald-700 transition hover:bg-emerald-100"
+      >
+        WhatsApp
+      </a>
+    )}
+    {fundacion.redesUrl && (
+      <a
+        href={fundacion.redesUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-1.5 rounded-lg border border-slate-200 px-3 py-2 text-xs font-semibold text-slate-600 transition hover:bg-slate-50"
+      >
+        Redes
+      </a>
+    )}
+  </div>
+</article>

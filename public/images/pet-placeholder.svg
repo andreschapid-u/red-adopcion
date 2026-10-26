@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-label="Foto no disponible">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#eef2ff"/>
+      <stop offset="1" stop-color="#e2e8f0"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg)"/>
+  <g fill="#c7d2fe">
+    <ellipse cx="300" cy="250" rx="42" ry="54"/>
+    <ellipse cx="386" cy="212" rx="42" ry="54"/>
+    <ellipse cx="472" cy="250" rx="42" ry="54"/>
+    <path d="M386 290c-62 0-112 47-112 104 0 39 29 65 66 65 17 0 31-7 46-7s29 7 46 7c37 0 66-26 66-65 0-57-50-104-112-104Z"/>
+  </g>
+  <text x="400" y="512" font-family="Segoe UI, system-ui, sans-serif" font-size="30" font-weight="600" fill="#64748b" text-anchor="middle">
+    Foto no disponible
+  </text>
+  <text x="400" y="550" font-family="Segoe UI, system-ui, sans-serif" font-size="20" fill="#94a3b8" text-anchor="middle">
+    Red de Adopción
+  </text>
+</svg>

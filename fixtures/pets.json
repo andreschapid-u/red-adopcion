@@ -1,0 +1,258 @@
+[
+  {
+    "id": "PET-0001",
+    "fundacionId": "FUND-01",
+    "fundacionNombre": "Fundación Patitas de Amor",
+    "nombre": "Luna",
+    "especie": "Perros",
+    "edad": "2 años",
+    "estado": "Disponible en adopción",
+    "cualidades": "Tranquila, sociable y obediente. Se lleva bien con niños y con otros perros.",
+    "descripcion": "Luna llegó a la fundación después de vivir en la calle. Hoy es una perrita tranquila que disfruta los paseos cortos y las tardes de sofá.\n\nEstá esterilizada, vacunada y desparasitada. Busca una familia que le dé tiempo, paciencia y mucho cariño.",
+    "fotos": {
+      "principal": "https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&w=1200&q=70",
+      "antes": "",
+      "despues": ""
+    }
+  },
+  {
+    "id": "PET-0002",
+    "fundacionId": "FUND-01",
+    "fundacionNombre": "Fundación Patitas de Amor",
+    "nombre": "Milo",
+    "especie": "Gatos",
+    "edad": "1 año",
+    "estado": "Disponible en adopción",
+    "cualidades": "Juguetón, curioso y muy cariñoso. Usa el arenero sin problemas.",
+    "descripcion": "Milo fue rescatado de un tejado cuando tenía pocas semanas. Creció en hogar de paso y ahora es un gato sano y juguetón que busca una familia con paciencia para adaptarse.\n\nIdeal para un hogar tranquilo, con ventanas protegidas.",
+    "fotos": {
+      "principal": "https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&w=1200&q=70",
+      "antes": "",
+      "despues": ""
+    }
+  },
+  {
+    "id": "PET-0003",
+    "fundacionId": "FUND-02",
+    "fundacionNombre": "Refugio Segundo Hogar",
+    "nombre": "Rocky",
+    "especie": "Perros",
+    "edad": "4 años",
+    "estado": "Disponible en adopción",
+    "cualidades": "Leal, protector y paseador entusiasta. Aprende rápido con refuerzo positivo.",
+    "descripcion": "Rocky es un perro mediano con mucha energía para el paseo y mucha calma en casa. Necesita un hogar sin gatos pequeños y con experiencia en perros de tamaño medio.\n\nSe entrega con seguimiento de adaptación por parte del refugio.",
+    "fotos": {
+      "principal": "https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=1200&q=70",
+      "antes": "",
+      "despues": ""
+    }
+  },
+  {
+    "id": "PET-0004",
+    "fundacionId": "FUND-02",
+    "fundacionNombre": "Refugio Segundo Hogar",
+    "nombre": "Nala",
+    "especie": "Gatos",
+    "edad": "2 años",
+    "estado": "Adoptado",
+    "cualidades": "Dulce y conversadora. Le encanta dormir en regazos.",
+    "descripcion": "Nala encontró familia en septiembre. Su proceso de adaptación fue tranquilo y hoy vive feliz con dos niños y un perro mayor.\n\nEsta ficha se conserva como parte de la historia del refugio.",
+    "fotos": {
+      "principal": "https://images.unsplash.com/photo-1573865526739-10659fec78a5?auto=format&fit=crop&w=1200&q=70",
+      "antes": "",
+      "despues": ""
+    }
+  },
+  {
+    "id": "PET-0005",
+    "fundacionId": "FUND-01",
+    "fundacionNombre": "Fundación Patitas de Amor",
+    "nombre": "Simba",
+    "especie": "Gatos",
+    "edad": "3 meses",
+    "estado": "Disponible en adopción",
+    "cualidades": "Travieso, valiente y lleno de energía. Ideal para una familia activa.",
+    "descripcion": "Simba es el más pequeño de una camada rescatada en un parqueadero. Está en proceso de vacunación y se entrega con compromiso de esterilización.\n\nBusca un hogar con otro gato joven o con personas dispuestas a jugar con él todos los días.",
+    "fotos": {
+      "principal": "https://images.unsplash.com/photo-1495360010541-f48722b34f7d?auto=format&fit=crop&w=1200&q=70",
+      "antes": "",
+      "despues": ""
+    }
+  },
+  {
+    "id": "PET-0006",
+    "fundacionId": "FUND-03",
+    "fundacionNombre": "Huellitas del Sur",
+    "nombre": "Toby",
+    "especie": "Perros",
+    "edad": "5 años",
+    "estado": "Disponible en adopción",
+    "cualidades": "Tranquilo, agradecido y muy compañero. Perfecto para espacios pequeños.",
+    "descripcion": "Toby fue abandonado en una bodega y pasó meses en una jaula. Aun así, es un perro noble que disfruta la compañía humana y los paseos suaves.\n\nNecesita un hogar calmado, sin escaleras y con controles veterinarios periódicos.",
+    "fotos": {
+      "principal": "https://images.unsplash.com/photo-1518717758536-85ae29035b6d?auto=format&fit=crop&w=1200&q=70",
+      "antes": "",
+      "despues": ""
+    }
+  },
+  {
+    "id": "PET-0007",
+    "fundacionId": "FUND-03",
+    "fundacionNombre": "Huellitas del Sur",
+    "nombre": "Canela",
+    "especie": "Perros",
+    "edad": "1 año",
+    "estado": "Disponible en adopción",
+    "cualidades": "Cariñosa, juguetona y sociable con otros perros.",
+    "descripcion": "Canela llegó desnutrida y con miedo. Después de cinco meses de cuidados, su transformación es evidente: hoy corre, juega y pide caricias.\n\nBusca una familia responsable que continúe con su alimentación y sus controles.",
+    "fotos": {
+      "principal": "https://images.unsplash.com/photo-1477884213360-7e9d7dcc1e48?auto=format&fit=crop&w=1200&q=70",
+      "antes": "https://images.unsplash.com/photo-1477884213360-7e9d7dcc1e48?auto=format&fit=crop&w=800&q=60",
+      "despues": "https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&w=800&q=60"
+    }
+  },
+  {
+    "id": "PET-0008",
+    "fundacionId": "FUND-01",
+    "fundacionNombre": "Fundación Patitas de Amor",
+    "nombre": "Pelusa",
+    "especie": "Otros",
+    "edad": "8 meses",
+    "estado": "Disponible en adopción",
+    "cualidades": "Mansa, curiosa y fácil de manejar. Ya usa su arenero.",
+    "descripcion": "Pelusa es una coneja rescatada de una venta informal. Necesita un espacio amplio, heno ilimitado y una familia informada sobre el cuidado de conejos.\n\nSe entrega con asesoría de alimentación y adaptación.",
+    "fotos": {
+      "principal": "https://images.unsplash.com/photo-1585110396000-c9ffd4e4b308?auto=format&fit=crop&w=1200&q=70",
+      "antes": "",
+      "despues": ""
+    }
+  },
+  {
+    "id": "PET-0009",
+    "fundacionId": "FUND-02",
+    "fundacionNombre": "Refugio Segundo Hogar",
+    "nombre": "Max",
+    "especie": "Perros",
+    "edad": "6 años",
+    "estado": "Disponible en adopción",
+    "cualidades": "Obediente, calmado y agradecido. Sabe caminar con correa.",
+    "descripcion": "Max vivió con una familia hasta que se mudaron y no pudieron llevarlo. Es un perro mayor, sano y con mucha calma para compartir.\n\nBuscamos un hogar definitivo donde pueda envejecer con dignidad.",
+    "fotos": {
+      "principal": "https://images.unsplash.com/photo-1537151608828-ea2b11777ee8?auto=format&fit=crop&w=1200&q=70",
+      "antes": "",
+      "despues": ""
+    }
+  },
+  {
+    "id": "PET-0010",
+    "fundacionId": "FUND-03",
+    "fundacionNombre": "Huellitas del Sur",
+    "nombre": "Clara",
+    "especie": "Gatos",
+    "edad": "3 años",
+    "estado": "Disponible en adopción",
+    "cualidades": "Independiente, limpia y muy observadora.",
+    "descripcion": "Clara apareció en el patio de una casa del sur de la ciudad. Es una gata adulta que prefiere los espacios tranquilos y las caricias suaves.\n\nEstá esterilizada y busca un hogar sin perros.",
+    "fotos": {
+      "principal": "https://images.unsplash.com/photo-1592194996308-7b43878e84a6?auto=format&fit=crop&w=1200&q=70",
+      "antes": "",
+      "despues": ""
+    }
+  },
+  {
+    "id": "PET-0011",
+    "fundacionId": "FUND-01",
+    "fundacionNombre": "Fundación Patitas de Amor",
+    "nombre": "Bruno",
+    "especie": "Perros",
+    "edad": "3 años",
+    "estado": "Fallecido",
+    "cualidades": "Alegre y juguetón hasta el final.",
+    "descripcion": "Bruno falleció por una enfermedad renal en 2025. Su familia adoptiva lo acompañó hasta el último día y hoy lo recuerda con cariño.\n\nMantenemos su ficha como memoria de su paso por la red.",
+    "fotos": {
+      "principal": "https://images.unsplash.com/photo-1558788353-f76d92427f16?auto=format&fit=crop&w=1200&q=70",
+      "antes": "",
+      "despues": ""
+    }
+  },
+  {
+    "id": "PET-0012",
+    "fundacionId": "FUND-03",
+    "fundacionNombre": "Huellitas del Sur",
+    "nombre": "Kiara",
+    "especie": "Perros",
+    "edad": "2 años",
+    "estado": "Disponible en adopción",
+    "cualidades": "Compañera, juguetona y muy expresiva.",
+    "descripcion": "Kiara fue rescatada junto a sus hermanos en un lote baldío. Hoy está llena de energía y lista para una familia que le enseñe rutinas.\n\nSe lleva bien con perros y con niños mayores.",
+    "fotos": {
+      "principal": "https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&w=1200&q=70",
+      "antes": "https://images.unsplash.com/photo-1558788353-f76d92427f16?auto=format&fit=crop&w=800&q=60",
+      "despues": "https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&w=800&q=60"
+    }
+  },
+  {
+    "id": "PET-0013",
+    "fundacionId": "FUND-02",
+    "fundacionNombre": "Refugio Segundo Hogar",
+    "nombre": "Tom",
+    "especie": "Gatos",
+    "edad": "5 años",
+    "estado": "Adoptado",
+    "cualidades": "Dormilón, tranquilo y muy limpio.",
+    "descripcion": "Tom encontró hogar con una pareja del barrio. Su adaptación fue inmediata y hoy comparte casa con otra gata rescatada.",
+    "fotos": {
+      "principal": "https://images.unsplash.com/photo-1533738363-b7f9aef128ce?auto=format&fit=crop&w=1200&q=70",
+      "antes": "",
+      "despues": ""
+    }
+  },
+  {
+    "id": "PET-0014",
+    "fundacionId": "FUND-01",
+    "fundacionNombre": "Fundación Patitas de Amor",
+    "nombre": "Copito",
+    "especie": "Otros",
+    "edad": "1 año",
+    "estado": "Disponible en adopción",
+    "cualidades": "Tranquilo, limpio y acostumbrado al contacto humano.",
+    "descripcion": "Copito fue entregado por una familia que no podía continuar con sus cuidados. Es un conejo adulto que necesita espacio para saltar y heno fresco todos los días.",
+    "fotos": {
+      "principal": "https://images.unsplash.com/photo-1535241749838-299277b6305f?auto=format&fit=crop&w=1200&q=70",
+      "antes": "",
+      "despues": ""
+    }
+  },
+  {
+    "id": "PET-0015",
+    "fundacionId": "FUND-02",
+    "fundacionNombre": "Refugio Segundo Hogar",
+    "nombre": "Nina",
+    "especie": "Perros",
+    "edad": "7 años",
+    "estado": "Disponible en adopción",
+    "cualidades": "Cariñosa, silenciosa y excelente compañía para personas mayores.",
+    "descripcion": "Nina es una perrita senior que fue dejada en la puerta del refugio. Está ciega de un ojo, pero se desenvuelve con confianza en espacios conocidos.\n\nBusca un hogar tranquilo y definitivo.",
+    "fotos": {
+      "principal": "https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&w=1200&q=70",
+      "antes": "",
+      "despues": ""
+    }
+  },
+  {
+    "id": "PET-0016",
+    "fundacionId": "FUND-03",
+    "fundacionNombre": "Huellitas del Sur",
+    "nombre": "Zeus",
+    "especie": "Perros",
+    "edad": "2 años",
+    "estado": "Disponible en adopción",
+    "cualidades": "Activo, inteligente y sociable. Necesita paseos diarios.",
+    "descripcion": "Zeus fue rescatado atropellado y logró recuperarse por completo. Hoy corre, juega y disfruta el agua.\n\nBusca una familia con tiempo para ejercitarlo y continuar su educación.",
+    "fotos": {
+      "principal": "https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=1200&h=900&q=70",
+      "antes": "",
+      "despues": ""
+    }
+  }
+]

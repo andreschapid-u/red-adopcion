@@ -1,0 +1,33 @@
+---
+import Base from '../layouts/Base.astro';
+import { withBase } from '../lib/urls';
+
+const title = 'Página no encontrada | Red de Adopción';
+const description =
+  'La página que buscas no existe o cambió de dirección. Explora las mascotas en adopción de nuestra red.';
+---
+
+<Base title={title} description={description} path="/404.html" noindex>
+  <section class="mx-auto grid max-w-3xl place-items-center px-4 py-24 text-center sm:px-6">
+    <p class="font-heading text-7xl font-extrabold text-indigo-200">404</p>
+    <h1 class="mt-4 text-3xl font-extrabold sm:text-4xl">Esta página se fue a pasear</h1>
+    <p class="mt-3 max-w-xl text-slate-600">
+      El enlace puede estar roto o la mascota pudo cambiar de estado. Vuelve al catálogo para ver quién
+      está buscando familia hoy.
+    </p>
+    <div class="mt-8 flex flex-wrap justify-center gap-3">
+      <a
+        href={withBase('/catalogo/')}
+        class="rounded-xl bg-indigo-600 px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-indigo-700"
+      >
+        Ver mascotas
+      </a>
+      <a
+        href={withBase('/')}
+        class="rounded-xl border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-slate-700 transition hover:bg-slate-50"
+      >
+        Ir al inicio
+      </a>
+    </div>
+  </section>
+</Base>

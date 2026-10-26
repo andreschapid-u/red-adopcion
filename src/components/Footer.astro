@@ -1,0 +1,70 @@
+---
+import { site } from '../lib/data';
+import { withBase } from '../lib/urls';
+
+const year = new Date().getFullYear();
+const instagram = site.general.instagramUrl;
+---
+
+<footer class="border-t border-slate-200 bg-slate-900 text-slate-300">
+  <div class="mx-auto grid max-w-7xl gap-10 px-4 py-12 sm:px-6 lg:grid-cols-4 lg:px-8">
+    <div class="lg:col-span-2">
+      <div class="flex items-center gap-2.5">
+        <span class="grid h-9 w-9 place-items-center rounded-xl bg-indigo-500 text-white">
+          <svg viewBox="0 0 24 24" class="h-5 w-5" fill="currentColor" aria-hidden="true">
+            <ellipse cx="6.7" cy="9.2" rx="2" ry="2.6" />
+            <ellipse cx="12" cy="7.2" rx="2" ry="2.6" />
+            <ellipse cx="17.3" cy="9.2" rx="2" ry="2.6" />
+            <path d="M12 11.8c-2.9 0-5.1 2.1-5.1 4.7 0 1.8 1.3 3 3 3 .8 0 1.4-.3 2.1-.3s1.3.3 2.1.3c1.7 0 3-1.2 3-3 0-2.6-2.2-4.7-5.1-4.7z" />
+          </svg>
+        </span>
+        <span class="font-heading text-lg font-extrabold text-white">Red de Adopción</span>
+      </div>
+      <p class="mt-4 max-w-md text-sm leading-6 text-slate-400">
+        {site.general.titulo
+          ? `${site.general.titulo}. `
+          : ''}Una red colaborativa de fundaciones que rescatan, cuidan y buscan familias responsables para sus animales.
+      </p>
+      {instagram && (
+        <a
+          href={instagram}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="mt-5 inline-flex items-center gap-2 rounded-lg bg-white/5 px-3 py-2 text-sm font-medium text-slate-200 transition hover:bg-white/10"
+        >
+          <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <rect x="3" y="3" width="18" height="18" rx="5" />
+            <circle cx="12" cy="12" r="4" />
+            <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" />
+          </svg>
+          Síguenos en Instagram
+        </a>
+      )}
+    </div>
+
+    <div>
+      <h2 class="font-heading text-sm font-semibold uppercase tracking-wider text-white">Explorar</h2>
+      <ul class="mt-4 space-y-2 text-sm">
+        <li><a class="hover:text-white" href={withBase('/catalogo/')}>Mascotas en adopción</a></li>
+        <li><a class="hover:text-white" href={withBase('/fundaciones/')}>Fundaciones</a></li>
+        <li><a class="hover:text-white" href={withBase('/mascotas/')}>Índice de mascotas</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h2 class="font-heading text-sm font-semibold uppercase tracking-wider text-white">Adoptar</h2>
+      <ul class="mt-4 space-y-2 text-sm">
+        <li><a class="hover:text-white" href={withBase('/catalogo/?especie=Perros')}>Perros en adopción</a></li>
+        <li><a class="hover:text-white" href={withBase('/catalogo/?especie=Gatos')}>Gatos en adopción</a></li>
+        <li><a class="hover:text-white" href={withBase('/catalogo/?especie=Otros')}>Otros animales</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-white/10">
+    <div class="mx-auto flex max-w-7xl flex-col gap-2 px-4 py-5 text-xs text-slate-500 sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-8">
+      <p>© {year} Red de Adopción. Todos los derechos reservados.</p>
+      <p>Adopta, no compres. Esteriliza y denuncia el maltrato.</p>
+    </div>
+  </div>
+</footer>

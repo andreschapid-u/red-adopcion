@@ -1,0 +1,33 @@
+{
+  "general": {
+    "titulo": "Red Unificada de Rescate y Adopción",
+    "mision": "Rescatamos animales en situación de abandono, los cuidamos y buscamos familias responsables que les den una segunda oportunidad. Trabajamos en red con fundaciones de todo el país para que cada adopción sea segura, consciente y para toda la vida.",
+    "instagramUrl": "https://instagram.com/redadopcion"
+  },
+  "fundaciones": [
+    {
+      "id": "FUND-01",
+      "nombre": "Fundación Patitas de Amor",
+      "whatsapp": "573001112233",
+      "color": "#4f46e5",
+      "logo": "",
+      "redesUrl": "https://instagram.com/patitasdeamor"
+    },
+    {
+      "id": "FUND-02",
+      "nombre": "Refugio Segundo Hogar",
+      "whatsapp": "573104445566",
+      "color": "#0d9488",
+      "logo": "",
+      "redesUrl": "https://instagram.com/segundohogar"
+    },
+    {
+      "id": "FUND-03",
+      "nombre": "Huellitas del Sur",
+      "whatsapp": "573207778899",
+      "color": "#db2777",
+      "logo": "",
+      "redesUrl": "https://instagram.com/huellitasdelsur"
+    }
+  ]
+}
