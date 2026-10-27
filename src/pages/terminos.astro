@@ -1,0 +1,115 @@
+---
+import Base from '../layouts/Base.astro';
+import { absUrl, withBase } from '../lib/urls';
+
+const title = 'Términos de uso | Red de Adopción';
+const description =
+  'Condiciones de uso del catálogo Red de Adopción: información publicada por las fundaciones, proceso de adopción y enlaces externos.';
+
+const structuredData = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: 'Términos de uso',
+    url: absUrl('/terminos/'),
+    description,
+    inLanguage: 'es-CO',
+  },
+];
+---
+
+<Base title={title} description={description} path="/terminos/" structuredData={structuredData}>
+  <div class="mx-auto max-w-3xl px-4 py-14 sm:px-6 lg:px-8">
+    <p class="text-sm font-semibold uppercase tracking-wider text-indigo-600">Legal</p>
+    <h1 class="mt-3 font-heading text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
+      Términos de uso
+    </h1>
+    <p class="mt-3 text-sm text-slate-500">Última actualización: 27 de octubre de 2026.</p>
+
+    <div class="mt-10 space-y-10 text-[15px] leading-7 text-slate-700">
+      <section>
+        <h2 class="font-heading text-xl font-bold text-slate-900">1. Qué es este sitio</h2>
+        <p class="mt-3">
+          Red de Adopción es un catálogo informativo y gratuito que reúne mascotas en adopción
+          publicadas por fundaciones y refugios. El sitio no es una tienda, no vende animales y no
+          cobra por publicar fichas.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="font-heading text-xl font-bold text-slate-900">2. Información de las fichas</h2>
+        <p class="mt-3">
+          Cada fundación es responsable de la veracidad y vigencia de los datos que registra: nombre,
+          edad, estado, descripción, fotos y datos de contacto. La información se actualiza de forma
+          periódica desde la hoja de cálculo del catálogo, pero puede existir un desfase de hasta 30
+          minutos o más si la fundación no ha actualizado su registro.
+        </p>
+        <p class="mt-3">
+          Antes de adoptar, confirma siempre el estado de la mascota y las condiciones directamente
+          con la fundación.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="font-heading text-xl font-bold text-slate-900">3. Proceso de adopción</h2>
+        <p class="mt-3">
+          La adopción se acuerda exclusivamente entre la fundación y la persona adoptante. Red de
+          Adopción no intermedia, no recibe pagos, no realiza visitas ni decide sobre las solicitudes.
+          Cada fundación aplica sus propios requisitos, entrevistas y protocolos de seguimiento.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="font-heading text-xl font-bold text-slate-900">4. Uso permitido</h2>
+        <p class="mt-3">Al usar el sitio te comprometes a no:</p>
+        <ul class="mt-3 list-disc space-y-1 pl-5">
+          <li>Publicar, recolectar o reutilizar datos de contacto para spam, estafas o fines comerciales.</li>
+          <li>Suplantar a una fundación o a una persona interesada en adoptar.</li>
+          <li>Extraer el catálogo de forma masiva para crear servicios engañosos.</li>
+          <li>Interferir con el funcionamiento del sitio o de la hoja de cálculo.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 class="font-heading text-xl font-bold text-slate-900">5. Enlaces externos</h2>
+        <p class="mt-3">
+          Las fichas incluyen enlaces a WhatsApp, Instagram y sitios de las fundaciones. No
+          controlamos esos servicios y no respondemos por su contenido, disponibilidad o políticas.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="font-heading text-xl font-bold text-slate-900">6. Propiedad intelectual</h2>
+        <p class="mt-3">
+          Las fotos, logos y textos de cada fundación pertenecen a sus respectivos titulares y se
+          publican con su autorización para difundir la adopción. El nombre, el diseño y el código del
+          sitio hacen parte del proyecto Red de Adopción. No se autoriza el uso comercial de las
+          imágenes sin permiso de la fundación.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="font-heading text-xl font-bold text-slate-900">7. Disponibilidad y responsabilidad</h2>
+        <p class="mt-3">
+          El sitio se ofrece “tal como está”. Hacemos lo posible por mantenerlo disponible y
+          actualizado, pero puede haber interrupciones, errores o fichas desactualizadas. En la medida
+          permitida por la ley, no asumimos responsabilidad por decisiones de adopción, acuerdos con
+          terceros o daños derivados del uso del sitio.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="font-heading text-xl font-bold text-slate-900">8. Ley aplicable y contacto</h2>
+        <p class="mt-3">
+          Estos términos se rigen por la ley colombiana. Para preguntas, correcciones o solicitudes
+          relacionadas con el sitio escribe a
+          <a class="font-semibold text-indigo-700 underline decoration-indigo-200 underline-offset-2 hover:text-indigo-900" href="mailto:chapid302@gmail.com">chapid302@gmail.com</a>.
+        </p>
+      </section>
+    </div>
+
+    <p class="mt-12 text-sm text-slate-500">
+      Consulta también la <a class="font-semibold text-indigo-700 hover:text-indigo-900" href={withBase('/privacidad/')}>política de privacidad</a>.
+    </p>
+  </div>
+</Base>

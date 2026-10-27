@@ -1,0 +1,148 @@
+---
+import Base from '../layouts/Base.astro';
+import { absUrl, withBase } from '../lib/urls';
+
+const title = 'Política de privacidad | Red de Adopción';
+const description =
+  'Cómo trata Red de Adopción los datos del catálogo, las imágenes y la información de las fundaciones, y qué acceso tiene la automatización sobre Google Sheets.';
+
+const structuredData = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: 'Política de privacidad',
+    url: absUrl('/privacidad/'),
+    description,
+    inLanguage: 'es-CO',
+  },
+];
+---
+
+<Base title={title} description={description} path="/privacidad/" structuredData={structuredData}>
+  <div class="mx-auto max-w-3xl px-4 py-14 sm:px-6 lg:px-8">
+    <p class="text-sm font-semibold uppercase tracking-wider text-indigo-600">Legal</p>
+    <h1 class="mt-3 font-heading text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
+      Política de privacidad
+    </h1>
+    <p class="mt-3 text-sm text-slate-500">Última actualización: 27 de octubre de 2026.</p>
+
+    <div class="mt-10 space-y-10 text-[15px] leading-7 text-slate-700">
+      <section>
+        <h2 class="font-heading text-xl font-bold text-slate-900">1. Responsable</h2>
+        <p class="mt-3">
+          Red de Adopción es un catálogo público de mascotas en adopción publicado por fundaciones y
+          refugios de Colombia. Para cualquier asunto relacionado con esta política puedes escribir a
+          <a class="font-semibold text-indigo-700 underline decoration-indigo-200 underline-offset-2 hover:text-indigo-900" href="mailto:chapid302@gmail.com">chapid302@gmail.com</a>.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="font-heading text-xl font-bold text-slate-900">2. Qué información se publica</h2>
+        <p class="mt-3">
+          El sitio muestra la información que cada fundación registra voluntariamente en la hoja de
+          cálculo del catálogo:
+        </p>
+        <ul class="mt-3 list-disc space-y-1 pl-5">
+          <li>Datos de la mascota: nombre, especie, edad, estado, cualidades, descripción y fotos.</li>
+          <li>
+            Datos de contacto de la fundación: nombre, WhatsApp, redes sociales, logo y color de
+            marca.
+          </li>
+        </ul>
+        <p class="mt-3">
+          Esta información es pública por diseño, para que una persona interesada pueda conocer a la
+          mascota y contactar directamente a la fundación. No publiques datos personales de terceros
+          en la hoja del catálogo.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="font-heading text-xl font-bold text-slate-900">3. Acceso a datos de Google</h2>
+        <p class="mt-3">
+          El sitio es estático. Para generar el catálogo, una automatización ejecutada en GitHub
+          Actions usa la cuenta de Google de la organización para:
+        </p>
+        <ul class="mt-3 list-disc space-y-1 pl-5">
+          <li>Leer la hoja de cálculo del catálogo (<code class="rounded bg-slate-100 px-1.5 py-0.5 text-[13px]">spreadsheets</code>).</li>
+          <li>Ejecutar las funciones de solo lectura del proyecto de Apps Script (<code class="rounded bg-slate-100 px-1.5 py-0.5 text-[13px]">script.scriptapp</code>).</li>
+        </ul>
+        <p class="mt-3">
+          La automatización <strong>no accede a Gmail, Contactos, Calendario ni a otros archivos de
+          Drive</strong>. Las fotos y los logos se publican como enlaces públicos de Google Drive que
+          la propia fundación registra en la hoja. El token de acceso se guarda como secreto cifrado
+          en GitHub y solo se usa durante la compilación del sitio; no se incluye en el HTML ni se
+          envía al navegador.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="font-heading text-xl font-bold text-slate-900">4. Navegación y cookies</h2>
+        <p class="mt-3">
+          El sitio no usa cuentas, cookies de analítica, publicidad ni rastreo de terceros. GitHub
+          Pages, como proveedor de alojamiento, puede registrar datos técnicos (dirección IP, agente
+          de usuario y fecha) en sus registros de seguridad, sujetos a la política de privacidad de
+          GitHub. Los filtros del catálogo se guardan únicamente en la dirección del navegador.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="font-heading text-xl font-bold text-slate-900">5. Para qué se usa la información</h2>
+        <ul class="mt-3 list-disc space-y-1 pl-5">
+          <li>Publicar y mantener actualizado el catálogo de mascotas en adopción.</li>
+          <li>Permitir que las personas interesadas contacten a la fundación correspondiente.</li>
+          <li>Atender solicitudes de corrección o retiro de información.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 class="font-heading text-xl font-bold text-slate-900">6. Con quién se comparte</h2>
+        <p class="mt-3">
+          La información del catálogo es pública. Además intervienen estos proveedores:
+        </p>
+        <ul class="mt-3 list-disc space-y-1 pl-5">
+          <li><strong>GitHub Pages</strong>, alojamiento del sitio.</li>
+          <li><strong>Google Drive</strong>, alojamiento de las fotos y logos.</li>
+          <li>
+            <strong>WhatsApp e Instagram</strong>, solo cuando la persona decide abrir un enlace de
+            contacto; desde ese momento aplican sus propias políticas.
+          </li>
+        </ul>
+        <p class="mt-3">No se venden ni se ceden datos a terceros con fines publicitarios.</p>
+      </section>
+
+      <section>
+        <h2 class="font-heading text-xl font-bold text-slate-900">7. Conservación y derechos</h2>
+        <p class="mt-3">
+          La información permanece publicada mientras la fundación la mantenga en el catálogo. Puedes
+          solicitar acceso, corrección, actualización o eliminación de los datos de una mascota o
+          fundación escribiendo a
+          <a class="font-semibold text-indigo-700 underline decoration-indigo-200 underline-offset-2 hover:text-indigo-900" href="mailto:chapid302@gmail.com">chapid302@gmail.com</a>. También puedes pedir el retiro de una foto o de un número de WhatsApp.
+        </p>
+        <p class="mt-3">
+          Si consideras que un dato publicado es inexacto o vulnera derechos de terceros, indícalo en
+          la solicitud con el enlace de la ficha para revisarlo.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="font-heading text-xl font-bold text-slate-900">8. Menores de edad</h2>
+        <p class="mt-3">
+          El sitio no está dirigido a menores de edad ni recopila sus datos. Las adopciones se
+          acuerdan directamente con cada fundación, que aplica sus propios requisitos y verificaciones.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="font-heading text-xl font-bold text-slate-900">9. Cambios</h2>
+        <p class="mt-3">
+          Esta política puede actualizarse para reflejar cambios en el sitio o en la normativa. La
+          fecha de la última actualización aparece al inicio de la página.
+        </p>
+      </section>
+    </div>
+
+    <p class="mt-12 text-sm text-slate-500">
+      Consulta también los <a class="font-semibold text-indigo-700 hover:text-indigo-900" href={withBase('/terminos/')}>términos de uso</a>.
+    </p>
+  </div>
+</Base>

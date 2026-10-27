@@ -64,6 +64,10 @@ const instagram = site.general.instagramUrl;
   <div class="border-t border-white/10">
     <div class="mx-auto flex max-w-7xl flex-col gap-2 px-4 py-5 text-xs text-slate-500 sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-8">
       <p>© {year} Red de Adopción. Todos los derechos reservados.</p>
+      <nav class="flex gap-4" aria-label="Legal">
+        <a class="hover:text-slate-300" href={withBase('/privacidad/')}>Privacidad</a>
+        <a class="hover:text-slate-300" href={withBase('/terminos/')}>Términos</a>
+      </nav>
       <p>Adopta, no compres. Esteriliza y denuncia el maltrato.</p>
     </div>
   </div>
