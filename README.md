@@ -12,7 +12,7 @@ El navegador **nunca llama al API**: GitHub Actions descarga los datos en el bui
 
 ```
 Google Sheets
-    │ spreadsheets.readonly
+    │ spreadsheets (SpreadsheetApp)
     ▼
 Apps Script (API Executable, repo privado)
     │ scripts.run + OAuth
@@ -75,7 +75,7 @@ El build usa `POST https://script.googleapis.com/v1/scripts/{deploymentId}:run` 
 
 1. Crea un proyecto en Google Cloud y habilita la **Apps Script API**.
 2. En Apps Script: **Configuración del proyecto → Proyecto de Google Cloud → Cambiar proyecto** y usa ese proyecto.
-3. Configura la pantalla de consentimiento (External) con el scope `https://www.googleapis.com/auth/script.scriptapp` y publícala en **producción** (en *Testing* el refresh token caduca a los 7 días).
+3. Configura la pantalla de consentimiento (External) con los scopes `https://www.googleapis.com/auth/script.scriptapp` y `https://www.googleapis.com/auth/spreadsheets` y publícala en **producción** (en *Testing* el refresh token caduca a los 7 días). `SpreadsheetApp` exige `spreadsheets` incluso para leer; el código del API solo ejecuta lecturas.
 4. Crea un **OAuth Client ID** de tipo *Desktop app*.
 5. Guarda `GOOGLE_CLIENT_ID` y `GOOGLE_CLIENT_SECRET` en `.env`.
 6. Ejecuta `npm run auth`, autoriza con la cuenta dueña de la hoja y copia el `GOOGLE_REFRESH_TOKEN` a `.env`.

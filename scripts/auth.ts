@@ -20,7 +20,10 @@ try {
 
 const PORT = 53682;
 const REDIRECT_URI = `http://localhost:${PORT}`;
-const SCOPE = 'https://www.googleapis.com/auth/script.scriptapp';
+const SCOPES = [
+  'https://www.googleapis.com/auth/script.scriptapp',
+  'https://www.googleapis.com/auth/spreadsheets',
+];
 
 const clientId = process.env.GOOGLE_CLIENT_ID;
 const clientSecret = process.env.GOOGLE_CLIENT_SECRET;
@@ -34,7 +37,7 @@ const authUrl = new URL('https://accounts.google.com/o/oauth2/v2/auth');
 authUrl.searchParams.set('client_id', clientId);
 authUrl.searchParams.set('redirect_uri', REDIRECT_URI);
 authUrl.searchParams.set('response_type', 'code');
-authUrl.searchParams.set('scope', SCOPE);
+authUrl.searchParams.set('scope', SCOPES.join(' '));
 authUrl.searchParams.set('access_type', 'offline');
 authUrl.searchParams.set('prompt', 'consent');
 authUrl.searchParams.set('include_granted_scopes', 'true');
@@ -110,6 +113,7 @@ const server = createServer(async (req, res) => {
     }
 
     respond(res, 200, 'Refresh token generado. Ya puedes cerrar esta pestaña y volver a la terminal.');
+    console.log('\nScopes otorgados: ' + String(json.scope || ''));
     console.log('\nGOOGLE_REFRESH_TOKEN=' + refreshToken);
     console.log('\nGuárdalo en .env y en los Secrets de GitHub. No lo compartas ni lo subas al repo.\n');
     setTimeout(() => process.exit(0), 500);
