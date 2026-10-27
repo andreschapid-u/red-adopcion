@@ -98,7 +98,7 @@ El workflow `.github/workflows/deploy.yml` compila y publica. El cron se pausa t
 Antes de dar por bueno un cambio:
 
 - [ ] `sitemap-index.xml` y `sitemap-0.xml` incluyen todas las fichas (sin 404).
-- [ ] `robots.txt` apunta al sitemap.
+- [ ] `robots.txt` apunta al sitemap. En un *project page* los buscadores no leen `/red-adopcion/robots.txt` (solo el de la raíz del dominio): registra el sitemap a mano en Google Search Console.
 - [ ] Cada ficha tiene `<title>`, description, canonical, OG y Twitter únicos.
 - [ ] JSON-LD válido (BreadcrumbList + WebPage + Pet).
 - [ ] [Rich Results Test](https://search.google.com/test/rich-results) sin errores.
