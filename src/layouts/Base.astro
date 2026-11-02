@@ -18,13 +18,37 @@ interface Props {
 }
 
 const { title, description, path, image, type, noindex, structuredData } = Astro.props;
+
+// GitHub Pages no permite cabeceras HTTP personalizadas. La CSP va por <meta>
+// y solo en produccion para no romper la toolbar de desarrollo de Astro.
+// frame-ancestors, report-uri y sandbox no funcionan en <meta>: quedan como
+// riesgo residual documentado en compliance/.
+const csp = [
+  "default-src 'self'",
+  "base-uri 'self'",
+  "object-src 'none'",
+  "script-src 'self'",
+  "style-src 'self'",
+  "img-src 'self' data: https://*.googleusercontent.com https://drive.google.com",
+  "font-src 'self'",
+  "connect-src 'self' https://*.googleusercontent.com",
+  "form-action 'self'",
+  "frame-src 'none'",
+  "manifest-src 'self'",
+  'upgrade-insecure-requests',
+].join('; ');
+
+const placeholder = withBase('/images/pet-placeholder.svg');
 ---
 
 <!doctype html>
-<html lang="es-CO">
+<html lang="es-CO" data-placeholder={placeholder}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    {import.meta.env.PROD && <meta http-equiv="Content-Security-Policy" content={csp} />}
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <script is:inline src={withBase('/image-fallback.js')}></script>
     <meta name="generator" content={Astro.generator} />
     <meta name="theme-color" content="#4f46e5" />
     <Seo

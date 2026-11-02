@@ -14,8 +14,6 @@ const { pet, priority = false } = Astro.props;
 
 const image = imageSources(pet.fotos.principal);
 const src = asset(image.src);
-const placeholder = asset('/images/pet-placeholder.svg');
-const fallback = `this.onerror=null;this.removeAttribute('srcset');this.src='${placeholder}'`;
 
 const estadoClass: Record<Estado, string> = {
   'Disponible en adopción': 'bg-emerald-50 text-emerald-700 ring-emerald-600/20',
@@ -38,7 +36,7 @@ const estadoClass: Record<Estado, string> = {
         fetchpriority={priority ? 'high' : 'auto'}
         decoding="async"
         class="h-full w-full object-cover motion-safe:transition motion-safe:duration-300 motion-safe:group-hover:scale-105"
-        onerror={fallback}
+        data-fallback="placeholder"
       />
       <span
         class:list={[

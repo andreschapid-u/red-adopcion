@@ -31,8 +31,6 @@ const fundacion = fundacionesPorId.get(pet.fundacionId);
 
 const image = imageSources(pet.fotos.principal);
 const imageSrc = asset(image.src);
-const placeholder = asset('/images/pet-placeholder.svg');
-const fallback = `this.onerror=null;this.removeAttribute('srcset');this.src='${placeholder}'`;
 
 const antes = pet.fotos.antes ? imageSources(pet.fotos.antes) : null;
 const despues = pet.fotos.despues ? imageSources(pet.fotos.despues) : null;
@@ -187,7 +185,7 @@ const structuredData = [
               fetchpriority="high"
               decoding="async"
               class="h-full w-full object-cover"
-              onerror={fallback}
+              data-fallback="placeholder"
             />
           </div>
         </figure>
@@ -210,7 +208,7 @@ const structuredData = [
                       loading="lazy"
                       decoding="async"
                       class="h-full w-full object-cover"
-                      onerror={fallback}
+                      data-fallback="placeholder"
                     />
                   </div>
                   <figcaption class="mt-2 text-xs font-semibold uppercase tracking-wide text-slate-500">
@@ -231,7 +229,7 @@ const structuredData = [
                       loading="lazy"
                       decoding="async"
                       class="h-full w-full object-cover"
-                      onerror={fallback}
+                      data-fallback="placeholder"
                     />
                   </div>
                   <figcaption class="mt-2 text-xs font-semibold uppercase tracking-wide text-emerald-700">
@@ -367,7 +365,7 @@ const structuredData = [
                     loading="lazy"
                     decoding="async"
                     class="absolute inset-0 h-full w-full bg-white object-contain p-1"
-                    onerror="this.style.display='none'"
+                    data-fallback="hide"
                   />
                 )}
               </div>
