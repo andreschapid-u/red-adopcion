@@ -9,7 +9,12 @@
     "auth": "tsx scripts/auth.ts",
     "build": "npm run data && astro build",
     "preview": "astro preview",
+    "check": "astro check",
+    "audit": "npm audit --audit-level=high",
     "astro": "astro"
+  },
+  "engines": {
+    "node": ">=24"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",

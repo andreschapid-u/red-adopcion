@@ -135,14 +135,26 @@ src/
     fundaciones.astro
     mascotas.astro         índice alfabético (crawlabilidad)
     mascota/[id].astro     ficha + OG + JSON-LD + compartir
+    seguridad.astro        divulgación responsable
     404.astro
   styles/global.css
 scripts/
   fetch-data.ts            OAuth + scripts.run + Zod + JSON
   auth.ts                  refresh token por loopback
 fixtures/                  datos de ejemplo (solo desarrollo)
-public/                    favicon, placeholder, og-default.png, robots.txt
+public/                    favicon, placeholder, og-default.png, robots.txt,
+                           image-fallback.js, .well-known/security.txt
 ```
+
+## Seguridad
+
+- CSP por `<meta>` en producción: `default-src 'self'`, sin `unsafe-inline` en scripts ni estilos. Los fallbacks de imágenes usan `data-fallback` y `public/image-fallback.js` para no necesitar manejadores inline.
+- `Referrer-Policy: strict-origin-when-cross-origin` por meta; las llamadas a Google del póster fuerzan `no-referrer`.
+- Workflows con actions pinneadas por SHA, `persist-credentials: false`, permisos mínimos por job, `npm audit --audit-level=high` y `timeout-minutes`.
+- CodeQL (`security-extended`) y dependency review en PRs; Dependabot semanal para npm y actions.
+- Secret scanning y push protection activos en GitHub; `SECURITY.md` y `/.well-known/security.txt`.
+- GitHub Pages no permite cabeceras HTTP personalizadas: `X-Frame-Options`, `X-Content-Type-Options`, `Permissions-Policy` y `frame-ancestors` no se pueden aplicar desde el repositorio. Queda documentado como riesgo residual; la mitigación real requiere un proxy (Cloudflare) delante de Pages.
+- El paquete de cumplimiento (SOC 2, ISO 27001, ISO 27701) vive en el repo privado `red-adopcion-compliance`.
 
 ## Rollback
 
