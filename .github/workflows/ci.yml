@@ -38,12 +38,15 @@ jobs:
       - name: Audit dependencies
         run: npm audit --audit-level=high
 
+      # Los PRs de Dependabot y los forks no reciben secretos: los datos se
+      # generan desde fixtures para validar el build sin credenciales de Google.
+      - name: Generate data from fixtures
+        run: npm run data
+        env:
+          USE_FIXTURES: '1'
+
       - name: Type check
         run: npx astro check
 
-      # Los PRs de Dependabot y los forks no reciben secretos: se compila con
-      # fixtures para validar el build sin credenciales de Google.
       - name: Build
-        run: npm run build
-        env:
-          USE_FIXTURES: '1'
+        run: npx astro build
