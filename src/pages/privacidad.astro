@@ -4,7 +4,7 @@ import { absUrl, withBase } from '../lib/urls';
 
 const title = 'Política de privacidad | Red de Adopción';
 const description =
-  'Cómo trata Red de Adopción los datos del catálogo, las imágenes y la información de las fundaciones, y qué acceso tiene la automatización sobre Google Sheets.';
+  'Cómo trata Red de Adopción los datos del catálogo, las imágenes, la información de las fundaciones y el acceso técnico a Google Sheets.';
 
 const structuredData = [
   {
@@ -16,6 +16,8 @@ const structuredData = [
     inLanguage: 'es-CO',
   },
 ];
+
+const contact = 'chapid302@gmail.com';
 ---
 
 <Base title={title} description={description} path="/privacidad/" structuredData={structuredData}>
@@ -24,15 +26,16 @@ const structuredData = [
     <h1 class="mt-3 font-heading text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
       Política de privacidad
     </h1>
-    <p class="mt-3 text-sm text-slate-500">Última actualización: 27 de octubre de 2026.</p>
+    <p class="mt-3 text-sm text-slate-500">Última actualización: 2 de noviembre de 2026.</p>
 
     <div class="mt-10 space-y-10 text-[15px] leading-7 text-slate-700">
       <section>
         <h2 class="font-heading text-xl font-bold text-slate-900">1. Responsable</h2>
         <p class="mt-3">
           Red de Adopción es un catálogo público de mascotas en adopción publicado por fundaciones y
-          refugios de Colombia. Para cualquier asunto relacionado con esta política puedes escribir a
-          <a class="font-semibold text-indigo-700 underline decoration-indigo-200 underline-offset-2 hover:text-indigo-900" href="mailto:chapid302@gmail.com">chapid302@gmail.com</a>.
+          refugios de Colombia. El responsable del tratamiento es el titular del proyecto Red de
+          Adopción. Para cualquier asunto relacionado con esta política puedes escribir a
+          <a class="font-semibold text-indigo-700 underline decoration-indigo-200 underline-offset-2 hover:text-indigo-900" href={`mailto:${contact}`}>{contact}</a>.
         </p>
       </section>
 
@@ -43,24 +46,43 @@ const structuredData = [
           cálculo del catálogo:
         </p>
         <ul class="mt-3 list-disc space-y-1 pl-5">
-          <li>Datos de la mascota: nombre, especie, edad, estado, cualidades, descripción y fotos.</li>
           <li>
-            Datos de contacto de la fundación: nombre, WhatsApp, redes sociales, logo y color de
+            Datos de la mascota: identificador, nombre, especie, edad, estado, cualidades,
+            descripción, historia y fecha de rescate, nivel de energía, resumen para compartir y
+            fotos.
+          </li>
+          <li>
+            Datos de la fundación: identificador, nombre, WhatsApp, redes sociales, logo y color de
             marca.
           </li>
         </ul>
         <p class="mt-3">
           Esta información es pública por diseño, para que una persona interesada pueda conocer a la
           mascota y contactar directamente a la fundación. No publiques datos personales de terceros
-          en la hoja del catálogo.
+          en la hoja del catálogo. El sitio no recibe ni publica datos de personas adoptantes.
         </p>
       </section>
 
       <section>
-        <h2 class="font-heading text-xl font-bold text-slate-900">3. Acceso a datos de Google</h2>
+        <h2 class="font-heading text-xl font-bold text-slate-900">3. Origen y base legal</h2>
+        <p class="mt-3">
+          La información la registra cada fundación en la hoja de cálculo del catálogo. Al hacerlo,
+          declara que cuenta con autorización para publicar los textos y las fotos de sus animales y
+          que los datos de contacto que suministra pueden mostrarse públicamente para facilitar la
+          adopción.
+        </p>
+        <p class="mt-3">
+          El tratamiento se apoya en el consentimiento de la fundación y en el interés legítimo de
+          difundir la adopción responsable. Cuando la fundación retira un registro, el dato deja de
+          publicarse en la siguiente compilación del sitio.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="font-heading text-xl font-bold text-slate-900">4. Acceso técnico a datos de Google</h2>
         <p class="mt-3">
           El sitio es estático. Para generar el catálogo, una automatización ejecutada en GitHub
-          Actions usa la cuenta de Google de la organización para:
+          Actions usa la cuenta de Google del proyecto para:
         </p>
         <ul class="mt-3 list-disc space-y-1 pl-5">
           <li>Leer la hoja de cálculo del catálogo (<code class="rounded bg-slate-100 px-1.5 py-0.5 text-[13px]">spreadsheets</code>).</li>
@@ -71,61 +93,99 @@ const structuredData = [
           Drive</strong>. Las fotos y los logos se publican como enlaces públicos de Google Drive que
           la propia fundación registra en la hoja. El token de acceso se guarda como secreto cifrado
           en GitHub y solo se usa durante la compilación del sitio; no se incluye en el HTML ni se
-          envía al navegador.
+          envía al navegador. El API no permite escritura sobre la hoja.
         </p>
       </section>
 
       <section>
-        <h2 class="font-heading text-xl font-bold text-slate-900">4. Navegación y cookies</h2>
+        <h2 class="font-heading text-xl font-bold text-slate-900">5. Navegación, cookies y registros</h2>
         <p class="mt-3">
-          El sitio no usa cuentas, cookies de analítica, publicidad ni rastreo de terceros. GitHub
-          Pages, como proveedor de alojamiento, puede registrar datos técnicos (dirección IP, agente
-          de usuario y fecha) en sus registros de seguridad, sujetos a la política de privacidad de
-          GitHub. Los filtros del catálogo se guardan únicamente en la dirección del navegador.
+          El sitio no usa cuentas, cookies de analítica, publicidad ni rastreo de terceros. Los
+          filtros del catálogo se guardan únicamente en la dirección del navegador.
+        </p>
+        <p class="mt-3">
+          GitHub Pages, como proveedor de alojamiento, puede registrar datos técnicos (dirección IP,
+          agente de usuario y fecha) en sus registros de seguridad, sujetos a la política de
+          privacidad de GitHub. Google Drive puede aplicar sus propias cookies y políticas cuando el
+          navegador carga una imagen alojada allí.
         </p>
       </section>
 
       <section>
-        <h2 class="font-heading text-xl font-bold text-slate-900">5. Para qué se usa la información</h2>
+        <h2 class="font-heading text-xl font-bold text-slate-900">6. Para qué se usa la información</h2>
         <ul class="mt-3 list-disc space-y-1 pl-5">
           <li>Publicar y mantener actualizado el catálogo de mascotas en adopción.</li>
           <li>Permitir que las personas interesadas contacten a la fundación correspondiente.</li>
-          <li>Atender solicitudes de corrección o retiro de información.</li>
+          <li>Atender solicitudes de corrección, retiro o ejercicio de derechos.</li>
+          <li>Mantener la seguridad, disponibilidad e integridad del sitio y del API.</li>
+          <li>Cumplir obligaciones legales y atender requerimientos de autoridades.</li>
         </ul>
       </section>
 
       <section>
-        <h2 class="font-heading text-xl font-bold text-slate-900">6. Con quién se comparte</h2>
+        <h2 class="font-heading text-xl font-bold text-slate-900">7. Con quién se comparte</h2>
         <p class="mt-3">
           La información del catálogo es pública. Además intervienen estos proveedores:
         </p>
         <ul class="mt-3 list-disc space-y-1 pl-5">
-          <li><strong>GitHub Pages</strong>, alojamiento del sitio.</li>
-          <li><strong>Google Drive</strong>, alojamiento de las fotos y logos.</li>
+          <li><strong>GitHub Pages y GitHub Actions</strong>, alojamiento del sitio y compilación.</li>
+          <li><strong>Google Sheets, Apps Script y Drive</strong>, origen de los datos y de las imágenes.</li>
           <li>
             <strong>WhatsApp e Instagram</strong>, solo cuando la persona decide abrir un enlace de
             contacto; desde ese momento aplican sus propias políticas.
           </li>
         </ul>
-        <p class="mt-3">No se venden ni se ceden datos a terceros con fines publicitarios.</p>
-      </section>
-
-      <section>
-        <h2 class="font-heading text-xl font-bold text-slate-900">7. Conservación y derechos</h2>
         <p class="mt-3">
-          La información permanece publicada mientras la fundación la mantenga en el catálogo. Puedes
-          solicitar acceso, corrección, actualización o eliminación de los datos de una mascota o
-          fundación escribiendo a
-          <a class="font-semibold text-indigo-700 underline decoration-indigo-200 underline-offset-2 hover:text-indigo-900" href="mailto:chapid302@gmail.com">chapid302@gmail.com</a>. También puedes pedir el retiro de una foto o de un número de WhatsApp.
-        </p>
-        <p class="mt-3">
-          Si consideras que un dato publicado es inexacto o vulnera derechos de terceros, indícalo en
-          la solicitud con el enlace de la ficha para revisarlo.
+          No se venden ni se ceden datos a terceros con fines publicitarios. GitHub y Google pueden
+          procesar datos fuera de Colombia; sus contratos de tratamiento incluyen cláusulas de
+          protección aplicables a transferencias internacionales.
         </p>
       </section>
 
       <section>
-        <h2 class="font-heading text-xl font-bold text-slate-900">8. Menores de edad</h2>
+        <h2 class="font-heading text-xl font-bold text-slate-900">8. Conservación</h2>
+        <p class="mt-3">
+          La información permanece publicada mientras la fundación la mantenga en el catálogo. Si se
+          solicita el retiro, deja de aparecer en la siguiente compilación del sitio y se elimina de
+          los respaldos operativos en un plazo máximo de 30 días. Los artefactos temporales de
+          compilación y los registros técnicos se conservan según la configuración de GitHub y Google
+          y no se usan para otras finalidades.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="font-heading text-xl font-bold text-slate-900">9. Seguridad</h2>
+        <p class="mt-3">
+          Aplicamos controles técnicos y organizativos proporcionados al riesgo: cifrado en tránsito,
+          política de seguridad de contenido, política de referencia, dependencias auditadas en cada
+          despliegue, análisis estático, actualizaciones automáticas de seguridad, escaneo de
+          secretos, permisos mínimos en el pipeline y en el API, y separación entre el repositorio
+          público del sitio y el repositorio privado del API.
+        </p>
+        <p class="mt-3">
+          Si detectamos un incidente que afecte datos personales, lo investigamos, contenemos y
+          notificamos a las personas y autoridades competentes cuando corresponda. Para reportar una
+          vulnerabilidad, consulta la
+          <a class="font-semibold text-indigo-700 hover:text-indigo-900" href={withBase('/seguridad/')}>página de divulgación responsable</a>.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="font-heading text-xl font-bold text-slate-900">10. Tus derechos</h2>
+        <p class="mt-3">
+          Puedes solicitar acceso, corrección, actualización, eliminación o revocatoria de la
+          autorización sobre los datos de una mascota o fundación escribiendo a
+          <a class="font-semibold text-indigo-700 underline decoration-indigo-200 underline-offset-2 hover:text-indigo-900" href={`mailto:${contact}`}>{contact}</a>. También puedes pedir el retiro de una foto o de un número de WhatsApp.
+        </p>
+        <p class="mt-3">
+          Indica el enlace de la ficha y el derecho que deseas ejercer. Responderemos en los plazos
+          previstos por la Ley 1581 de 2012. Si consideras que la respuesta no es adecuada, puedes
+          acudir a la Superintendencia de Industria y Comercio (SIC).
+        </p>
+      </section>
+
+      <section>
+        <h2 class="font-heading text-xl font-bold text-slate-900">11. Menores de edad</h2>
         <p class="mt-3">
           El sitio no está dirigido a menores de edad ni recopila sus datos. Las adopciones se
           acuerdan directamente con cada fundación, que aplica sus propios requisitos y verificaciones.
@@ -133,16 +193,18 @@ const structuredData = [
       </section>
 
       <section>
-        <h2 class="font-heading text-xl font-bold text-slate-900">9. Cambios</h2>
+        <h2 class="font-heading text-xl font-bold text-slate-900">12. Cambios</h2>
         <p class="mt-3">
           Esta política puede actualizarse para reflejar cambios en el sitio o en la normativa. La
-          fecha de la última actualización aparece al inicio de la página.
+          fecha de la última actualización aparece al inicio de la página. Los cambios sustanciales se
+          anuncian en el sitio.
         </p>
       </section>
     </div>
 
     <p class="mt-12 text-sm text-slate-500">
-      Consulta también los <a class="font-semibold text-indigo-700 hover:text-indigo-900" href={withBase('/terminos/')}>términos de uso</a>.
+      Consulta también los <a class="font-semibold text-indigo-700 hover:text-indigo-900" href={withBase('/terminos/')}>términos de uso</a>
+      y la <a class="font-semibold text-indigo-700 hover:text-indigo-900" href={withBase('/seguridad/')}>política de seguridad</a>.
     </p>
   </div>
 </Base>

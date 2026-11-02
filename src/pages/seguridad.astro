@@ -1,0 +1,107 @@
+---
+import Base from '../layouts/Base.astro';
+import { absUrl, withBase } from '../lib/urls';
+
+const title = 'Seguridad y divulgación responsable | Red de Adopción';
+const description =
+  'Cómo reportar una vulnerabilidad en Red de Adopción, alcance de la revisión, tiempos de respuesta y compromiso de buena fe.';
+
+const structuredData = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: 'Seguridad y divulgación responsable',
+    url: absUrl('/seguridad/'),
+    description,
+    inLanguage: 'es-CO',
+  },
+];
+
+const contact = 'chapid302@gmail.com';
+---
+
+<Base title={title} description={description} path="/seguridad/" structuredData={structuredData}>
+  <div class="mx-auto max-w-3xl px-4 py-14 sm:px-6 lg:px-8">
+    <p class="text-sm font-semibold uppercase tracking-wider text-indigo-600">Seguridad</p>
+    <h1 class="mt-3 font-heading text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
+      Divulgación responsable
+    </h1>
+    <p class="mt-3 text-sm text-slate-500">Última actualización: 2 de noviembre de 2026.</p>
+
+    <div class="mt-10 space-y-10 text-[15px] leading-7 text-slate-700">
+      <section>
+        <h2 class="font-heading text-xl font-bold text-slate-900">1. Cómo reportar</h2>
+        <p class="mt-3">
+          Si encontraste una vulnerabilidad, escríbenos a
+          <a class="font-semibold text-indigo-700 underline decoration-indigo-200 underline-offset-2 hover:text-indigo-900" href={`mailto:${contact}?subject=%5BSECURITY%5D%20Red%20de%20Adopci%C3%B3n`}>{contact}</a>
+          con el asunto <code class="rounded bg-slate-100 px-1.5 py-0.5 text-[13px]">[SECURITY]</code>.
+          No abras un issue público con detalles explotables.
+        </p>
+        <p class="mt-3">Incluye, si es posible:</p>
+        <ul class="mt-3 list-disc space-y-1 pl-5">
+          <li>La URL, el endpoint o el repositorio afectado.</li>
+          <li>Los pasos para reproducirlo y el resultado esperado frente al observado.</li>
+          <li>El impacto que crees que tiene y una prueba de concepto.</li>
+          <li>Un medio de contacto para coordinar la revisión.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 class="font-heading text-xl font-bold text-slate-900">2. Alcance</h2>
+        <p class="mt-3">Están dentro del alcance:</p>
+        <ul class="mt-3 list-disc space-y-1 pl-5">
+          <li>El sitio estático y su código del lado del cliente.</li>
+          <li>El API de solo lectura en Apps Script y su deployment.</li>
+          <li>El pipeline de compilación y despliegue del repositorio.</li>
+        </ul>
+        <p class="mt-3">Quedan fuera del alcance:</p>
+        <ul class="mt-3 list-disc space-y-1 pl-5">
+          <li>GitHub, Google, WhatsApp, Instagram y demás servicios de terceros.</li>
+          <li>Ingeniería social, spam o ataques físicos.</li>
+          <li>Denegación de servicio, pruebas volumétricas o escaneos que degraden el servicio.</li>
+          <li>Reportes que solo señalen cabeceras ausentes en GitHub Pages sin un impacto demostrado.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 class="font-heading text-xl font-bold text-slate-900">3. Qué puedes esperar</h2>
+        <ul class="mt-3 list-disc space-y-1 pl-5">
+          <li>Acuse de recibo en un máximo de 3 días hábiles.</li>
+          <li>Triaje y evaluación de severidad en un máximo de 5 días hábiles.</li>
+          <li>Corrección o mitigación de un hallazgo alto confirmado en un máximo de 30 días.</li>
+          <li>Crédito en el commit de la corrección si lo deseas.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 class="font-heading text-xl font-bold text-slate-900">4. Compromiso de buena fe</h2>
+        <p class="mt-3">
+          No iniciaremos acciones legales por una investigación de buena fe que respete esta
+          política. Para mantener ese compromiso:
+        </p>
+        <ul class="mt-3 list-disc space-y-1 pl-5">
+          <li>No accedas, modifiques ni exfiltres datos que no sean tuyos.</li>
+          <li>No degradas el servicio ni ejecutes pruebas de carga.</li>
+          <li>Danos un plazo razonable antes de divulgar el hallazgo.</li>
+          <li>No uses el hallazgo para obtener un beneficio económico.</li>
+        </ul>
+        <p class="mt-3">
+          Este programa no ofrece recompensas económicas. La divulgación responsable es voluntaria y
+          se reconoce públicamente cuando la persona lo autoriza.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="font-heading text-xl font-bold text-slate-900">5. Más información</h2>
+        <p class="mt-3">
+          El detalle técnico de los controles aplicados está en la
+          <a class="font-semibold text-indigo-700 hover:text-indigo-900" href={withBase('/privacidad/')}>política de privacidad</a>
+          y en los
+          <a class="font-semibold text-indigo-700 hover:text-indigo-900" href={withBase('/terminos/')}>términos de uso</a>.
+          El archivo <code class="rounded bg-slate-100 px-1.5 py-0.5 text-[13px]">security.txt</code> está en
+          <a class="font-semibold text-indigo-700 hover:text-indigo-900" href={withBase('/.well-known/security.txt')}>.well-known/security.txt</a>.
+        </p>
+      </section>
+    </div>
+  </div>
+</Base>
