@@ -29,6 +29,8 @@ const indice = pets.map((pet) => {
     fn: pet.fundacionNombre,
     ed: pet.edad,
     q: truncate(petSummary(pet), 150),
+    a: pet.anioRescate,
+    en: pet.energia,
     p: asset(imagen.src),
     ps: imagen.srcset ?? '',
   };
@@ -92,7 +94,7 @@ const structuredData = [
     <div class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
       <form
         id="filters"
-        class="grid gap-3 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm sm:grid-cols-2 lg:grid-cols-4"
+        class="grid gap-3 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm sm:grid-cols-2 lg:grid-cols-3"
         novalidate
       >
         <label class="block">
@@ -122,6 +124,19 @@ const structuredData = [
         </label>
 
         <label class="block">
+          <span class="mb-1 block text-xs font-semibold uppercase tracking-wide text-slate-500">Energía</span>
+          <select
+            id="filter-energia"
+            class="w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-sm text-slate-800 shadow-sm focus:border-indigo-500"
+          >
+            <option value="">Todas las energías</option>
+            <option value="Baja">Baja</option>
+            <option value="Media">Media</option>
+            <option value="Alta">Alta</option>
+          </select>
+        </label>
+
+        <label class="block">
           <span class="mb-1 block text-xs font-semibold uppercase tracking-wide text-slate-500">Estado</span>
           <select
             id="filter-estado"
@@ -131,6 +146,17 @@ const structuredData = [
             <option value="Disponible en adopción" selected>Disponible en adopción</option>
             <option value="Adoptado">Adoptado</option>
             <option value="Fallecido">Fallecido</option>
+          </select>
+        </label>
+
+        <label class="block">
+          <span class="mb-1 block text-xs font-semibold uppercase tracking-wide text-slate-500">Orden</span>
+          <select
+            id="filter-orden"
+            class="w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-sm text-slate-800 shadow-sm focus:border-indigo-500"
+          >
+            <option value="nombre">Nombre (A–Z)</option>
+            <option value="rescate">Rescate más reciente</option>
           </select>
         </label>
 
@@ -188,6 +214,8 @@ const structuredData = [
     </div>
   </div>
 <script>
+  import { energiaClass } from '../lib/utils';
+
   const BASE = import.meta.env.BASE_URL.replace(/\/+$/, '');
   const PLACEHOLDER = `${BASE}/images/pet-placeholder.svg`;
   const PER_PAGE = 24;
@@ -201,7 +229,9 @@ const structuredData = [
   const count = document.getElementById('pets-count');
   const fundSelect = document.getElementById('filter-fundacion') as HTMLSelectElement | null;
   const especieSelect = document.getElementById('filter-especie') as HTMLSelectElement | null;
+  const energiaSelect = document.getElementById('filter-energia') as HTMLSelectElement | null;
   const estadoSelect = document.getElementById('filter-estado') as HTMLSelectElement | null;
+  const ordenSelect = document.getElementById('filter-orden') as HTMLSelectElement | null;
   const searchInput = document.getElementById('filter-q') as HTMLInputElement | null;
   const resetButton = document.getElementById('filter-reset');
 
@@ -214,6 +244,8 @@ const structuredData = [
     fn: string;
     ed: string;
     q: string;
+    a: number | null;
+    en: string;
     p: string;
     ps: string;
   };
@@ -221,14 +253,16 @@ const structuredData = [
   type State = {
     fundacion: string;
     especie: string;
+    energia: string;
     estado: string;
+    orden: string;
     q: string;
     pagina: number;
   };
 
   const items: Item[] = dataNode ? (JSON.parse(dataNode.textContent || '[]') as Item[]) : [];
 
-  if (grid && pager && count && fundSelect && especieSelect && estadoSelect && searchInput) {
+  if (grid && pager && count && fundSelect && especieSelect && energiaSelect && estadoSelect && ordenSelect && searchInput) {
     const esc = (value: unknown): string =>
       String(value ?? '').replace(/[&<>"']/g, (char) => {
         switch (char) {
@@ -258,6 +292,21 @@ const structuredData = [
       return 'bg-slate-100 text-slate-600 ring-slate-500/20';
     };
 
+    const chipsHtml = (pet: Item): string => {
+      const chips: string[] = [];
+      if (pet.a) {
+        chips.push(
+          `<span class="rounded-full bg-slate-100 px-2 py-0.5 text-[11px] font-medium text-slate-600">Rescate ${pet.a}</span>`,
+        );
+      }
+      if (pet.en) {
+        chips.push(
+          `<span class="rounded-full px-2 py-0.5 text-[11px] font-medium ring-1 ring-inset ${energiaClass(pet.en)}">Energía ${esc(pet.en.toLowerCase())}</span>`,
+        );
+      }
+      return chips.length ? `<div class="mt-2 flex flex-wrap items-center gap-1.5">${chips.join('')}</div>` : '';
+    };
+
     const cardHtml = (pet: Item, index: number): string => {
       const srcset = pet.ps ? ` srcset="${esc(pet.ps)}"` : '';
       const eager = index < 4;
@@ -277,6 +326,7 @@ const structuredData = [
         <span class="shrink-0 text-xs font-medium text-slate-500">${esc(pet.ed)}</span>
       </div>
       <p class="mt-1 text-sm font-medium text-indigo-700">${esc(pet.fn)}</p>
+      ${chipsHtml(pet)}
       <p class="mt-2 line-clamp-2 min-h-[2.5rem] text-sm leading-5 text-slate-600">${esc(pet.q)}</p>
       <span class="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-indigo-700">
         Conocer a ${esc(pet.n)}
@@ -293,7 +343,9 @@ const structuredData = [
       return {
         fundacion: params.get('fundacion') || '',
         especie: params.get('especie') || '',
+        energia: params.get('energia') || '',
         estado: params.has('estado') ? params.get('estado') || '' : DEFAULT_ESTADO,
+        orden: params.get('orden') === 'rescate' ? 'rescate' : 'nombre',
         q: params.get('q') || '',
         pagina: Number.isFinite(rawPage) && rawPage > 0 ? rawPage : 1,
       };
@@ -304,7 +356,9 @@ const structuredData = [
     const applyInputs = (): void => {
       fundSelect.value = state.fundacion;
       especieSelect.value = state.especie;
+      energiaSelect.value = state.energia;
       estadoSelect.value = state.estado;
+      ordenSelect.value = state.orden;
       searchInput.value = state.q;
     };
 
@@ -317,8 +371,11 @@ const structuredData = [
 
       set('fundacion', state.fundacion);
       set('especie', state.especie);
+      set('energia', state.energia);
       if (state.estado === DEFAULT_ESTADO) url.searchParams.delete('estado');
       else url.searchParams.set('estado', state.estado);
+      if (state.orden === 'nombre') url.searchParams.delete('orden');
+      else url.searchParams.set('orden', state.orden);
       set('q', state.q);
       if (state.pagina > 1) url.searchParams.set('pagina', String(state.pagina));
       else url.searchParams.delete('pagina');
@@ -367,6 +424,7 @@ const structuredData = [
     const matches = (pet: Item): boolean => {
       if (state.fundacion && pet.f !== state.fundacion) return false;
       if (state.especie && pet.e !== state.especie) return false;
+      if (state.energia && pet.en !== state.energia) return false;
       if (state.estado && pet.s !== state.estado) return false;
       if (state.q) {
         const needle = norm(state.q);
@@ -376,12 +434,16 @@ const structuredData = [
     };
 
     const render = (): void => {
-      const filtered = items
-        .filter(matches)
-        .sort(
-          (a, b) =>
-            a.n.localeCompare(b.n, 'es', { sensitivity: 'base', numeric: true }) || a.i.localeCompare(b.i),
+      const filtered = items.filter(matches).sort((a, b) => {
+        if (state.orden === 'rescate') {
+          const diff = (b.a ?? 0) - (a.a ?? 0);
+          if (diff !== 0) return diff;
+        }
+        return (
+          a.n.localeCompare(b.n, 'es', { sensitivity: 'base', numeric: true }) ||
+          a.i.localeCompare(b.i)
         );
+      });
 
       const totalPages = Math.max(1, Math.ceil(filtered.length / PER_PAGE));
       if (state.pagina > totalPages) state.pagina = totalPages;
@@ -406,7 +468,7 @@ const structuredData = [
     };
 
     const resetFilters = (): void => {
-      state = { fundacion: '', especie: '', estado: DEFAULT_ESTADO, q: '', pagina: 1 };
+      state = { fundacion: '', especie: '', energia: '', estado: DEFAULT_ESTADO, orden: 'nombre', q: '', pagina: 1 };
       applyInputs();
       syncUrl('push');
       render();
@@ -426,8 +488,22 @@ const structuredData = [
       render();
     });
 
+    energiaSelect.addEventListener('change', () => {
+      state.energia = energiaSelect.value;
+      state.pagina = 1;
+      syncUrl('push');
+      render();
+    });
+
     estadoSelect.addEventListener('change', () => {
       state.estado = estadoSelect.value;
+      state.pagina = 1;
+      syncUrl('push');
+      render();
+    });
+
+    ordenSelect.addEventListener('change', () => {
+      state.orden = ordenSelect.value === 'rescate' ? 'rescate' : 'nombre';
       state.pagina = 1;
       syncUrl('push');
       render();

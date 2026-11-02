@@ -28,7 +28,8 @@ GitHub Actions ──► scripts/fetch-data.ts ──► src/data/{site,pets}.js
 - Imágenes: resize de `lh3.googleusercontent.com` con `srcset` (400/800/1200) y placeholder local si falta o falla la foto.
 - SEO: rutas reales, canonical, OG/Twitter por mascota, JSON-LD, sitemap e índice alfabético.
 - Compartir: Facebook, WhatsApp, X, Instagram (share nativo o copiar enlace), copiar y Web Share.
-- Filtros: índice compacto embebido + paginación client-side de 24; el HTML inicial ya trae 24 tarjetas.
+- Póster: imagen 1080×1920 generada en el navegador con Canvas 2D, encuadre ajustable por arrastre o teclado y `navigator.share({ files })` en móvil; si no hay share nativo, descarga el JPEG.
+- Filtros: índice compacto embebido + paginación client-side de 24; el HTML inicial ya trae 24 tarjetas. Permite filtrar por fundación, especie, energía, estado y texto; ordenar por nombre o rescate más reciente.
 
 ## Comandos
 
@@ -106,9 +107,20 @@ Antes de dar por bueno un cambio:
 - [ ] [X Card Validator](https://cards-dev.twitter.com/validator).
 - [ ] Vista previa de WhatsApp en móvil.
 - [ ] Lighthouse móvil: SEO 100, Performance ≥ 90, Accessibility ≥ 95.
-- [ ] Playwright: navegación, filtros, atrás/adelante, 404, compartir y consola sin errores.
+- [ ] Playwright: navegación, filtros, atrás/adelante, 404, compartir, póster (arrastre, centrar, descarga 1080×1920) y consola sin errores.
 
 Los filtros usan query params pero el canonical de `/catalogo/` es fijo para no indexar combinaciones.
+
+## Póster para compartir
+
+La ficha abre un diálogo con dos pestañas: **Enlace** (redes y copiar) e **Imagen** (póster 1080×1920). El póster se dibuja con Canvas 2D, sin librerías ni WebAssembly:
+
+- Foto con cover crop y anclaje inicial según la orientación; se ajusta arrastrando o con las flechas del teclado y **Centrar** restaura el anclaje.
+- Marca, estado, overline, nombre con auto-shrink de 128 a 72 px, chips de especie/edad/rescate/energía, resumen de hasta tres líneas y pie con la URL.
+- `toBlob('image/jpeg', 0.92)` y `navigator.share({ files })`; si el navegador no comparte archivos, descarga el JPEG.
+- En iOS el blob se pre-genera al soltar el arrastre para llamar al share dentro del gesto del usuario.
+
+El resumen sale de `Resumen_Compartir` (máx. 120 caracteres). Si está vacío, se usa la primera oración de `Historia_Rescate`, luego `Resumen_Cualidades` y por último una frase genérica.
 
 ## Estructura
 
@@ -144,3 +156,6 @@ public/                    favicon, placeholder, og-default.png, robots.txt
 - `src/data/` está en `.gitignore`: los datos se generan en cada build.
 - `public/.nojekyll` evita que Pages ignore archivos que empiezan por `_`.
 - Instagram no ofrece intent web de compartir; el modal usa Web Share o copia el enlace y abre Instagram.
+- La pestaña **Imagen** genera el póster con `Canvas` y lo comparte como archivo. La foto se puede arrastrar para centrar al animal; el botón **Centrar** vuelve al anclaje inicial.
+- El resumen del póster sale de `Resumen_Compartir`; si está vacío, usa la primera oración de `Historia_Rescate`, luego `Resumen_Cualidades` y por último una frase genérica.
+- `Fecha_Rescate` acepta `AAAA`, `AAAA-MM` o `AAAA-MM-DD`; la API expone `fechaRescate` y `anioRescate`. `Nivel_Energia` es `Baja`, `Media` o `Alta`.

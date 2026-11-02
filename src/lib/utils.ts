@@ -52,6 +52,57 @@ export function petSummary(pet: Mascota): string {
   );
 }
 
+/** Primera oración de un texto largo, sin saltos de línea. */
+export function firstSentence(text: string): string {
+  const clean = (text || '').replace(/\s+/g, ' ').trim();
+  if (!clean) return '';
+  const match = clean.match(/^[^.!?]+[.!?]/);
+  return (match ? match[0] : clean).trim();
+}
+
+/**
+ * Texto corto del póster. Prioriza la columna Resumen_Compartir; si falta,
+ * cae a la primera oración de la historia, luego a las cualidades y por último
+ * a una frase genérica. Máximo 120 caracteres para que entre en tres líneas.
+ */
+export function posterSummary(pet: Mascota): string {
+  const directo = truncate(pet.resumenCompartir, 120);
+  if (directo) return directo;
+
+  const historia = truncate(firstSentence(pet.historia), 120);
+  if (historia) return historia;
+
+  const cualidades = truncate(pet.cualidades, 120);
+  if (cualidades) return cualidades;
+
+  return truncate(`Busca una familia en ${pet.fundacionNombre}.`, 120);
+}
+
+/** Chip de rescate: `Rescate 2019`. Vacío si no hay año. */
+export function formatFechaRescate(pet: Mascota): string {
+  return pet.anioRescate ? `Rescate ${pet.anioRescate}` : '';
+}
+
+/** Chip de energía: `Energía baja`. Vacío si no hay dato. */
+export function energiaLabel(pet: Mascota): string {
+  return pet.energia ? `Energía ${pet.energia.toLowerCase()}` : '';
+}
+
+/** Clases del badge de energía (deben quedar literales para Tailwind). */
+export function energiaClass(energia: string): string {
+  if (energia === 'Baja') return 'bg-sky-50 text-sky-700 ring-sky-600/20';
+  if (energia === 'Media') return 'bg-amber-50 text-amber-700 ring-amber-600/20';
+  if (energia === 'Alta') return 'bg-rose-50 text-rose-700 ring-rose-600/20';
+  return 'bg-slate-100 text-slate-600 ring-slate-500/20';
+}
+
+/** Más reciente primero; las mascotas sin año van al final. */
+export function sortByRescate(pets: Mascota[]): Mascota[] {
+  return [...pets].sort(
+    (a, b) => (b.anioRescate ?? 0) - (a.anioRescate ?? 0) || comparePets(a, b),
+  );
+}
+
 /** Letra inicial sin tildes, para el índice alfabético. */
 export function initialLetter(name: string): string {
   const first = (name || '')

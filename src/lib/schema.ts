@@ -2,9 +2,11 @@ import { z } from 'zod';
 
 export const ESPECIES = ['Perros', 'Gatos', 'Otros'] as const;
 export const ESTADOS = ['Disponible en adopción', 'Adoptado', 'Fallecido'] as const;
+export const NIVELES_ENERGIA = ['Baja', 'Media', 'Alta'] as const;
 
 export type Especie = (typeof ESPECIES)[number];
 export type Estado = (typeof ESTADOS)[number];
+export type Energia = (typeof NIVELES_ENERGIA)[number];
 
 export const fundacionSchema = z.object({
   id: z.string().min(1),
@@ -25,6 +27,11 @@ export const mascotaSchema = z.object({
   estado: z.enum(ESTADOS),
   cualidades: z.string(),
   descripcion: z.string(),
+  historia: z.string().default(''),
+  fechaRescate: z.string().default(''),
+  anioRescate: z.number().int().nullable().default(null),
+  energia: z.enum(['Baja', 'Media', 'Alta', '']).default(''),
+  resumenCompartir: z.string().default(''),
   fotos: z.object({
     principal: z.string(),
     antes: z.string(),

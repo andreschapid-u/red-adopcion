@@ -1,0 +1,627 @@
+{
+  "version": "2.21",
+  "children": [
+    {
+      "type": "frame",
+      "id": "E8UzAi",
+      "x": 0,
+      "y": 0,
+      "name": "Historia 1080x1920",
+      "clip": true,
+      "width": 1080,
+      "height": 1920,
+      "fill": "#0F172A",
+      "layout": "none",
+      "children": [
+        {
+          "type": "rectangle",
+          "id": "HebW7",
+          "x": 0,
+          "y": 0,
+          "name": "Foto",
+          "fill": {
+            "type": "image",
+            "enabled": true,
+            "url": "canela.jpg",
+            "mode": "cover"
+          },
+          "width": 1080,
+          "height": 1120
+        },
+        {
+          "type": "rectangle",
+          "id": "aidQH",
+          "x": 0,
+          "y": 820,
+          "name": "Degradado",
+          "fill": {
+            "type": "gradient",
+            "gradientType": "linear",
+            "enabled": true,
+            "rotation": 180,
+            "size": {
+              "height": 1
+            },
+            "colors": [
+              {
+                "color": "#0F172A00",
+                "position": 0
+              },
+              {
+                "color": "#0F172A",
+                "position": 1
+              }
+            ]
+          },
+          "width": 1080,
+          "height": 300
+        },
+        {
+          "type": "frame",
+          "id": "UOi1z",
+          "x": 64,
+          "y": 260,
+          "name": "Barra superior",
+          "width": 952,
+          "height": 60,
+          "justifyContent": "space_between",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "frame",
+              "id": "JghiZ",
+              "name": "Marca",
+              "fill": "#0F172AB3",
+              "cornerRadius": 999,
+              "gap": 12,
+              "padding": [
+                16,
+                26
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "xk8D4",
+                  "name": "Huella",
+                  "width": 30,
+                  "height": 30,
+                  "icon": "paw-print",
+                  "library": "lucide",
+                  "fill": "#FFFFFF"
+                },
+                {
+                  "type": "text",
+                  "id": "UyShj",
+                  "name": "Marca texto",
+                  "fill": "#FFFFFF",
+                  "content": "RED DE ADOPCIÓN",
+                  "fontFamily": "Inter",
+                  "fontSize": 28,
+                  "fontWeight": "700",
+                  "letterSpacing": 2
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "ehakv",
+              "name": "Estado",
+              "fill": "#059669",
+              "cornerRadius": 999,
+              "padding": [
+                16,
+                26
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "v159V",
+                  "name": "Estado texto",
+                  "fill": "#FFFFFF",
+                  "content": "DISPONIBLE",
+                  "fontFamily": "Inter",
+                  "fontSize": 28,
+                  "fontWeight": "700",
+                  "letterSpacing": 2
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "ETpLt",
+          "x": 72,
+          "y": 1160,
+          "name": "Overline",
+          "fill": "#6EE7B7",
+          "content": "BUSCA FAMILIA",
+          "fontFamily": "Inter",
+          "fontSize": 34,
+          "fontWeight": "700",
+          "letterSpacing": 4
+        },
+        {
+          "type": "text",
+          "id": "L9eVdA",
+          "x": 72,
+          "y": 1212,
+          "name": "Nombre",
+          "fill": "#FFFFFF",
+          "content": "Canela",
+          "lineHeight": 0.95,
+          "fontFamily": "Montserrat",
+          "fontSize": 128,
+          "fontWeight": "800"
+        },
+        {
+          "type": "frame",
+          "id": "VreW1",
+          "x": 72,
+          "y": 1352,
+          "name": "Datos",
+          "height": 69,
+          "gap": 14,
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "frame",
+              "id": "EyF5v",
+              "name": "Chip Perro · 1 año",
+              "fill": "#FFFFFF14",
+              "cornerRadius": 999,
+              "padding": [
+                14,
+                24
+              ],
+              "children": [
+                {
+                  "type": "text",
+                  "id": "SpCF5",
+                  "name": "Chip texto",
+                  "fill": "#E2E8F0",
+                  "content": "Perro · 1 año",
+                  "fontFamily": "Inter",
+                  "fontSize": 34,
+                  "fontWeight": "500"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "sA2CE",
+              "name": "Chip Rescate 2019",
+              "fill": "#FFFFFF14",
+              "cornerRadius": 999,
+              "padding": [
+                14,
+                24
+              ],
+              "children": [
+                {
+                  "type": "text",
+                  "id": "P3GNx4",
+                  "name": "Chip texto",
+                  "fill": "#E2E8F0",
+                  "content": "Rescate 2019",
+                  "fontFamily": "Inter",
+                  "fontSize": 34,
+                  "fontWeight": "500"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "ntmoo",
+              "name": "Chip Energía baja",
+              "fill": "#FFFFFF14",
+              "cornerRadius": 999,
+              "padding": [
+                14,
+                24
+              ],
+              "children": [
+                {
+                  "type": "text",
+                  "id": "eIdI2",
+                  "name": "Chip texto",
+                  "fill": "#E2E8F0",
+                  "content": "Energía baja",
+                  "fontFamily": "Inter",
+                  "fontSize": 34,
+                  "fontWeight": "500"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "DANrP",
+          "x": 72,
+          "y": 1440,
+          "name": "Resumen",
+          "fill": "#CBD5E1",
+          "textGrowth": "fixed-width",
+          "width": 936,
+          "content": "Vivía amarrada, expuesta al sol y a la lluvia, pasando hambre y maltrato. Hoy busca una familia que le dé paz.",
+          "lineHeight": 1.3,
+          "fontFamily": "Inter",
+          "fontSize": 44,
+          "fontWeight": "normal"
+        },
+        {
+          "type": "rectangle",
+          "id": "ZtLr7",
+          "x": 72,
+          "y": 1640,
+          "name": "Linea",
+          "fill": "#FFFFFF1F",
+          "width": 936,
+          "height": 1
+        },
+        {
+          "type": "text",
+          "id": "qhlch",
+          "x": 72,
+          "y": 1655,
+          "name": "Url",
+          "fill": "#94A3B8",
+          "content": "andreschapid-u.github.io/red-adopcion",
+          "fontFamily": "Inter",
+          "fontSize": 30,
+          "fontWeight": "600"
+        },
+        {
+          "type": "text",
+          "id": "DUrT6",
+          "x": 720,
+          "y": 1655,
+          "name": "Lema",
+          "fill": "#64748B",
+          "content": "Adopta, no compres",
+          "fontFamily": "Inter",
+          "fontSize": 30,
+          "fontWeight": "normal"
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "FpS5L",
+      "x": 1200,
+      "y": 0,
+      "name": "Dialogo movil 390x844",
+      "clip": true,
+      "width": 390,
+      "height": 844,
+      "fill": "#0F172A",
+      "layout": "none",
+      "children": [
+        {
+          "type": "frame",
+          "id": "LMmsw",
+          "x": 16,
+          "y": 60,
+          "name": "Dialogo",
+          "width": 358,
+          "height": 700,
+          "fill": "#FFFFFF",
+          "cornerRadius": 16,
+          "layout": "none",
+          "children": [
+            {
+              "type": "text",
+              "id": "V94osV",
+              "x": 24,
+              "y": 84,
+              "name": "Titulo dialogo",
+              "fill": "#0F172A",
+              "content": "Comparte esta ficha",
+              "fontFamily": "Montserrat",
+              "fontSize": 18,
+              "fontWeight": "800"
+            },
+            {
+              "type": "text",
+              "id": "XhpvX",
+              "x": 24,
+              "y": 112,
+              "name": "Subtitulo dialogo",
+              "fill": "#64748B",
+              "content": "Ayuda a que Canela encuentre familia.",
+              "fontFamily": "Inter",
+              "fontSize": 13,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "frame",
+              "id": "l1Av1",
+              "x": 24,
+              "y": 142,
+              "name": "Tabs",
+              "width": 310,
+              "height": 40,
+              "fill": "#F1F5F9",
+              "cornerRadius": 12,
+              "layout": "none",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "Edhus",
+                  "x": 0,
+                  "y": 12,
+                  "name": "Tab enlace",
+                  "fill": "#64748B",
+                  "textGrowth": "fixed-width",
+                  "width": 155,
+                  "content": "Enlace",
+                  "textAlign": "center",
+                  "fontFamily": "Inter",
+                  "fontSize": 13,
+                  "fontWeight": "600"
+                },
+                {
+                  "type": "frame",
+                  "id": "cLTkE",
+                  "x": 157,
+                  "y": 4,
+                  "name": "Tab imagen activo",
+                  "width": 149,
+                  "height": 32,
+                  "fill": "#FFFFFF",
+                  "cornerRadius": 9
+                },
+                {
+                  "type": "text",
+                  "id": "H4pwL",
+                  "x": 157,
+                  "y": 12,
+                  "name": "Tab imagen",
+                  "fill": "#4F46E5",
+                  "textGrowth": "fixed-width",
+                  "width": 149,
+                  "content": "Imagen",
+                  "textAlign": "center",
+                  "fontFamily": "Inter",
+                  "fontSize": 13,
+                  "fontWeight": "700"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "aE79W",
+              "x": 79,
+              "y": 200,
+              "name": "Preview",
+              "clip": true,
+              "width": 200,
+              "height": 356,
+              "fill": "#0F172A",
+              "cornerRadius": 12,
+              "layout": "none",
+              "children": [
+                {
+                  "type": "rectangle",
+                  "id": "x64EVe",
+                  "x": 0,
+                  "y": 0,
+                  "name": "Preview foto",
+                  "fill": {
+                    "type": "image",
+                    "enabled": true,
+                    "url": "canela.jpg",
+                    "mode": "cover"
+                  },
+                  "width": 200,
+                  "height": 356
+                },
+                {
+                  "type": "rectangle",
+                  "id": "CzToH",
+                  "x": 0,
+                  "y": 196,
+                  "name": "Preview degradado",
+                  "fill": {
+                    "type": "gradient",
+                    "gradientType": "linear",
+                    "enabled": true,
+                    "rotation": 180,
+                    "size": {
+                      "height": 1
+                    },
+                    "colors": [
+                      {
+                        "color": "#0F172A00",
+                        "position": 0
+                      },
+                      {
+                        "color": "#0F172A",
+                        "position": 1
+                      }
+                    ]
+                  },
+                  "width": 200,
+                  "height": 160
+                },
+                {
+                  "type": "text",
+                  "id": "Enetj",
+                  "x": 14,
+                  "y": 228,
+                  "name": "Preview overline",
+                  "fill": "#6EE7B7",
+                  "content": "BUSCA FAMILIA",
+                  "fontFamily": "Inter",
+                  "fontSize": 9,
+                  "fontWeight": "700",
+                  "letterSpacing": 1
+                },
+                {
+                  "type": "text",
+                  "id": "WdXNN",
+                  "x": 14,
+                  "y": 242,
+                  "name": "Preview nombre",
+                  "fill": "#FFFFFF",
+                  "content": "Canela",
+                  "fontFamily": "Montserrat",
+                  "fontSize": 26,
+                  "fontWeight": "800"
+                },
+                {
+                  "type": "frame",
+                  "id": "D3ONHG",
+                  "x": 14,
+                  "y": 280,
+                  "name": "Preview chip",
+                  "fill": "#FFFFFF1F",
+                  "cornerRadius": 999,
+                  "padding": [
+                    4,
+                    8
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "I23N9",
+                      "name": "Preview chip texto",
+                      "fill": "#E2E8F0",
+                      "content": "Perro · 1 año",
+                      "fontFamily": "Inter",
+                      "fontSize": 9,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "efGtO",
+                  "x": 14,
+                  "y": 302,
+                  "name": "Preview resumen",
+                  "fill": "#CBD5E1",
+                  "textGrowth": "fixed-width",
+                  "width": 172,
+                  "content": "Vivía amarrada y con miedo.",
+                  "lineHeight": 1.3,
+                  "fontFamily": "Inter",
+                  "fontSize": 10,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "frame",
+                  "id": "tmKpD",
+                  "x": 40,
+                  "y": 330,
+                  "name": "Hint",
+                  "fill": "#0F172ACC",
+                  "cornerRadius": 999,
+                  "padding": [
+                    6,
+                    10
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "MKuhl",
+                      "name": "Hint texto",
+                      "fill": "#FFFFFF",
+                      "content": "Arrastrá para centrar",
+                      "fontFamily": "Inter",
+                      "fontSize": 9,
+                      "fontWeight": "600"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "Ba9zQ",
+              "x": 24,
+              "y": 580,
+              "name": "Boton centrar",
+              "width": 96,
+              "height": 42,
+              "fill": "#F1F5F9",
+              "cornerRadius": 12
+            },
+            {
+              "type": "text",
+              "id": "vW7RT",
+              "x": 24,
+              "y": 592,
+              "name": "Boton centrar texto",
+              "fill": "#334155",
+              "textGrowth": "fixed-width",
+              "width": 96,
+              "content": "Centrar",
+              "textAlign": "center",
+              "fontFamily": "Inter",
+              "fontSize": 13,
+              "fontWeight": "600"
+            },
+            {
+              "type": "frame",
+              "id": "z0DCa",
+              "x": 130,
+              "y": 580,
+              "name": "Boton compartir",
+              "width": 204,
+              "height": 42,
+              "fill": "#4F46E5",
+              "cornerRadius": 12
+            },
+            {
+              "type": "text",
+              "id": "KijZJ",
+              "x": 130,
+              "y": 592,
+              "name": "Boton compartir texto",
+              "fill": "#FFFFFF",
+              "textGrowth": "fixed-width",
+              "width": 204,
+              "content": "Finalizar y compartir",
+              "textAlign": "center",
+              "fontFamily": "Inter",
+              "fontSize": 13,
+              "fontWeight": "700"
+            },
+            {
+              "type": "icon",
+              "id": "nGjbN",
+              "x": 314,
+              "y": 86,
+              "name": "Cerrar",
+              "width": 18,
+              "height": 18,
+              "icon": "x",
+              "library": "lucide",
+              "fill": "#94A3B8"
+            },
+            {
+              "type": "text",
+              "id": "llxi3",
+              "x": 24,
+              "y": 640,
+              "name": "Pie dialogo",
+              "fill": "#94A3B8",
+              "textGrowth": "fixed-width",
+              "width": 310,
+              "content": "La imagen se adapta a historias y estados. La URL queda dentro de la foto.",
+              "lineHeight": 1.4,
+              "fontFamily": "Inter",
+              "fontSize": 11,
+              "fontWeight": "normal"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "fileToken": "9673a548-dbcf-429c-a1a4-c37955015673"
+}

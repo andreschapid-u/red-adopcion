@@ -2,7 +2,7 @@
 import type { Estado, Mascota } from '../lib/schema';
 import { imageSources } from '../lib/images';
 import { asset, petPath } from '../lib/urls';
-import { CARD_SIZES, petSummary, speciesLabel } from '../lib/utils';
+import { CARD_SIZES, energiaClass, energiaLabel, formatFechaRescate, petSummary, speciesLabel } from '../lib/utils';
 
 interface Props {
   pet: Mascota;
@@ -56,6 +56,25 @@ const estadoClass: Record<Estado, string> = {
         <span class="shrink-0 text-xs font-medium text-slate-500">{pet.edad}</span>
       </div>
       <p class="mt-1 text-sm font-medium text-indigo-700">{pet.fundacionNombre}</p>
+      {(pet.anioRescate || pet.energia) && (
+        <div class="mt-2 flex flex-wrap items-center gap-1.5">
+          {pet.anioRescate && (
+            <span class="rounded-full bg-slate-100 px-2 py-0.5 text-[11px] font-medium text-slate-600">
+              {formatFechaRescate(pet)}
+            </span>
+          )}
+          {pet.energia && (
+            <span
+              class:list={[
+                'rounded-full px-2 py-0.5 text-[11px] font-medium ring-1 ring-inset',
+                energiaClass(pet.energia),
+              ]}
+            >
+              {energiaLabel(pet)}
+            </span>
+          )}
+        </div>
+      )}
       <p class="mt-2 line-clamp-2 min-h-[2.5rem] text-sm leading-5 text-slate-600">
         {petSummary(pet)}
       </p>
