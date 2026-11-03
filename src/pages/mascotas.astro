@@ -23,7 +23,7 @@ const letras = [...grupos.keys()].sort((a, b) => {
 
 const anchor = (letter: string): string => `letra-${letter === '#' ? 'otros' : letter}`;
 
-const title = `Todas las mascotas (${formatNumber(pets.length)}) | Red de Adopción`;
+const title = 'Mascotas rescatadas | Red de Adopción';
 const description = metaDescription(
   `Índice alfabético de las ${pets.length} mascotas de la red: perros, gatos y otros animales rescatados que buscan familia o que ya fueron adoptados.`,
 );

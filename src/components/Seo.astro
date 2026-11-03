@@ -27,6 +27,23 @@ const canonical = absUrl(path);
 const absoluteImage = image || absUrl('/og-default.png');
 const usingDefaultImage = !image;
 const siteName = 'Red de Adopción';
+const hasOrganization = structuredData.some(
+  (item) => (item as { '@type'?: string })['@type'] === 'Organization' || (item as { '@type'?: string })['@type'] === 'NGO',
+);
+const allStructuredData = hasOrganization
+  ? structuredData
+  : [
+      ...structuredData,
+      {
+        '@context': 'https://schema.org',
+        '@type': 'Organization',
+        name: siteName,
+        url: absUrl('/'),
+        description:
+          'Red de Adopción es un catálogo público de mascotas en adopción en Colombia. Rescata, cuida y busca familias responsables para animales en situación de abandono.',
+        inLanguage: 'es-CO',
+      },
+    ];
 ---
 
 <title>{title}</title>
@@ -49,7 +66,8 @@ const siteName = 'Red de Adopción';
 <meta name="twitter:title" content={title} />
 <meta name="twitter:description" content={description} />
 <meta name="twitter:image" content={absoluteImage} />
+<meta property="twitter:image:alt" content={`${siteName} — mascotas en adopción`} />
 
-{structuredData.map((item) => (
+{allStructuredData.map((item) => (
   <script type="application/ld+json" set:html={jsonLdString(item)} />
 ))}
