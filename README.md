@@ -152,6 +152,7 @@ public/                    favicon, placeholder, og-default.png, robots.txt,
 - `Referrer-Policy: strict-origin-when-cross-origin` por meta; las llamadas a Google del póster fuerzan `no-referrer`.
 - Workflows con actions pinneadas por SHA, `persist-credentials: false`, permisos mínimos por job, `npm audit --audit-level=high` y `timeout-minutes`.
 - CodeQL (`security-extended`) y dependency review en PRs; Dependabot semanal para npm y actions.
+- Workflow `CI` en cada PR: `npm ci`, `npm audit`, `astro check` y build con `USE_FIXTURES=1`. Los PRs de Dependabot y los forks no reciben secretos, así que no se usa la API real.
 - Secret scanning y push protection activos en GitHub; `SECURITY.md` y `/.well-known/security.txt`.
 - GitHub Pages no permite cabeceras HTTP personalizadas: `X-Frame-Options`, `X-Content-Type-Options`, `Permissions-Policy` y `frame-ancestors` no se pueden aplicar desde el repositorio. Queda documentado como riesgo residual; la mitigación real requiere un proxy (Cloudflare) delante de Pages.
 - El paquete de cumplimiento (SOC 2, ISO 27001, ISO 27701) vive en el repo privado `red-adopcion-compliance`.
