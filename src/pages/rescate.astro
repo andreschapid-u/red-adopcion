@@ -1,0 +1,183 @@
+---
+import Base from '../layouts/Base.astro';
+import { availablePets, formatNumber, metaDescription } from '../lib/utils';
+import { pets } from '../lib/data';
+import { absUrl, withBase } from '../lib/urls';
+
+const disponibles = availablePets(pets);
+
+const title = 'Rescate y adopción de mascotas en Colombia | Red de Adopción';
+const description = metaDescription(
+  `Rescate y adopción de mascotas en Colombia: conoce cómo funcionan las fundaciones de la red, cuántas mascotas rescatadas buscan hogar y encuentra a tu próximo compañero.`,
+);
+
+const structuredData = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: 'Rescate y adopción de mascotas en Colombia',
+    url: absUrl('/rescate/'),
+    description,
+    inLanguage: 'es-CO',
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Inicio', item: absUrl('/') },
+      { '@type': 'ListItem', position: 2, name: 'Rescate y adopción', item: absUrl('/rescate/') },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [
+      {
+        '@type': 'Question',
+        name: '¿Qué es el rescate de animales en Colombia?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Es el proceso por el cual animales en situación de abandono o peligro son recogidos, trasladados a una fundación y cuidados hasta que encuentran una familia adoptiva responsable.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: '¿Cómo llegan las mascotas a las fundaciones?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Los animales llegan a las fundaciones a través del rescate, el retiro voluntario de familias o el apoyo a refugios. Desde ahí se les brinda cuidado veterinario, socialización y seguimiento hasta la adopción.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: '¿Cómo adopto una mascota rescatada?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Puedes revisar el catálogo de mascotas en adopción, contactar a la fundación por WhatsApp y coordinar el proceso de adopción responsable, que incluye la entrega y el seguimiento.',
+        },
+      },
+    ],
+  },
+];
+---
+
+<Base title={title} description={description} path="/rescate/" structuredData={structuredData}>
+  <div class="border-b border-slate-200 bg-white">
+    <div class="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
+      <nav aria-label="Ruta de navegación" class="text-sm text-slate-500">
+        <ol class="flex flex-wrap items-center gap-2">
+          <li><a href={withBase('/')} class="hover:text-slate-900">Inicio</a></li>
+          <li aria-hidden="true">/</li>
+          <li aria-current="page" class="font-medium text-slate-700">Rescate y adopción</li>
+        </ol>
+      </nav>
+
+      <h1 class="mt-4 text-3xl font-extrabold sm:text-4xl">Rescate y adopción de mascotas en Colombia</h1>
+      <p class="mt-3 max-w-3xl text-lg text-slate-600">
+        Cada mascota en esta red pasó por un momento de rescate o abandono. Hoy, con el apoyo de las
+        fundaciones, busca una familia responsable que le devuelva el cariño que necesita.
+      </p>
+
+      <dl class="mt-8 grid max-w-xl grid-cols-3 gap-3">
+        <div class="rounded-2xl border border-slate-200 bg-slate-50 p-4">
+          <dt class="text-xs font-semibold uppercase tracking-wide text-slate-500">Mascotas en adopción</dt>
+          <dd class="mt-1 font-heading text-2xl font-extrabold text-indigo-700">{formatNumber(disponibles.length)}</dd>
+        </div>
+        <div class="rounded-2xl border border-slate-200 bg-slate-50 p-4">
+          <dt class="text-xs font-semibold uppercase tracking-wide text-slate-500">Red de fundaciones</dt>
+          <dd class="mt-1 font-heading text-2xl font-extrabold text-indigo-700">{formatNumber(pets.length > 0 ? new Set(pets.map((p) => p.fundacionId)).size : 0)}</dd>
+        </div>
+        <div class="rounded-2xl border border-slate-200 bg-slate-50 p-4">
+          <dt class="text-xs font-semibold uppercase tracking-wide text-slate-500">Rescatadas buscando hogar</dt>
+          <dd class="mt-1 font-heading text-2xl font-extrabold text-indigo-700">{formatNumber(disponibles.length)}</dd>
+        </div>
+      </dl>
+    </div>
+  </div>
+
+  <section class="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
+    <h2 class="font-heading text-2xl font-extrabold text-slate-900">¿Cómo funciona el rescate y la adopción?</h2>
+    <ol class="mt-6 grid gap-4 sm:grid-cols-3">
+      <li class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+        <p class="text-xs font-semibold uppercase tracking-wide text-indigo-600">Paso 1</p>
+        <h3 class="mt-2 text-lg font-bold text-slate-900">Rescate</h3>
+        <p class="mt-2 text-sm leading-6 text-slate-600">
+          Animales en situación de abandono son trasladados a una fundación aliada. El traslado y los
+          cuidados iniciales son responsabilidad de la organización comprometida con el caso.
+        </p>
+      </li>
+      <li class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+        <p class="text-xs font-semibold uppercase tracking-wide text-indigo-600">Paso 2</p>
+        <h3 class="mt-2 text-lg font-bold text-slate-900">Cuidados</h3>
+        <p class="mt-2 text-sm leading-6 text-slate-600">
+          La fundación los integra al grupo, les brinda atención veterinaria y socialización hasta que
+          estén listos para una adopción responsable.
+        </p>
+      </li>
+      <li class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+        <p class="text-xs font-semibold uppercase tracking-wide text-indigo-600">Paso 3</p>
+        <h3 class="mt-2 text-lg font-bold text-slate-900">Adopción</h3>
+        <p class="mt-2 text-sm leading-6 text-slate-600">
+          Una familia adopta, con seguimiento de la fundación. Así el animal vuelve a una vida digna y
+          la adopción deja de ser un intercambio por una oportunidad real.
+        </p>
+      </li>
+    </ol>
+
+    <div class="mt-12 grid gap-6 lg:grid-cols-2">
+      <div class="rounded-3xl border border-indigo-100 bg-indigo-50 p-6 sm:p-8">
+        <h2 class="font-heading text-2xl font-extrabold text-slate-900">Busca mascotas en adopción</h2>
+        <p class="mt-2 text-slate-600">
+          Explora el catálogo completo de mascotas rescatadas que buscan familia. Filtra por especie,
+          fundación y estado, y contacta directamente por WhatsApp.
+        </p>
+        <a
+          href={withBase('/catalogo/')}
+          class="mt-6 inline-flex items-center gap-2 rounded-xl bg-indigo-600 px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-indigo-700"
+        >
+          Ver mascotas en adopción
+        </a>
+      </div>
+      <div class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
+        <h2 class="font-heading text-2xl font-extrabold text-slate-900">Conoce a las fundaciones</h2>
+        <p class="mt-2 text-slate-600">
+          La red está integrada por fundaciones y refugios comprometidos con el bienestar animal. Conoce
+          sus historias y sumá visibilidad a las mascotas que cuidan.
+        </p>
+        <a
+          href={withBase('/fundaciones/')}
+          class="mt-6 inline-flex items-center gap-2 rounded-xl border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-slate-700 shadow-sm transition hover:bg-slate-50"
+        >
+          Ver fundaciones de la red
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-slate-50">
+    <div class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+      <h2 class="font-heading text-2xl font-extrabold text-slate-900">Preguntas frecuentes</h2>
+      <div class="mt-6 space-y-4">
+        {[
+          {
+            q: '¿Qué es el rescate de animales en Colombia?',
+            a: 'Es el proceso por el cual animales en situación de abandono o peligro son recogidos, trasladados a una fundación y cuidados hasta que encuentran una familia adoptiva responsable.',
+          },
+          {
+            q: '¿Cómo llegan las mascotas a las fundaciones?',
+            a: 'Los animales llegan a las fundaciones a través del rescate, el retiro voluntario de familias o el apoyo a refugios. Desde ahí se les brinda cuidado veterinario y socialización hasta la adopción.',
+          },
+          {
+            q: '¿Cómo adopto una mascota rescatada?',
+            a: 'Revisás el catálogo de mascotas en adopción, contactás a la fundación por WhatsApp y coordinás el proceso de adopción responsable, con entrega y seguimiento.',
+          },
+        ].map((item) => (
+          <details class="rounded-2xl border border-slate-200 bg-white p-5">
+            <summary class="cursor-pointer font-semibold text-slate-900">{item.q}</summary>
+            <p class="mt-2 text-sm leading-6 text-slate-600">{item.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+</Base>
